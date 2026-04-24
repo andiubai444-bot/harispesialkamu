@@ -1,26 +1,40 @@
 "use client";
 import { useEffect, useState } from "react";
 
-const START_DATE = new Date("2025-01-27T00:00:00");
+const START_DATE = new Date("2026-01-27T00:00:00");
 
 export default function CounterBersama() {
+  // Tambahkan state mounted untuk mencegah Hydration Error di Next.js
+  const [mounted, setMounted] = useState(false);
   const [d, setD] = useState(0);
   const [h, setH] = useState(0);
   const [m, setM] = useState(0);
   const [s, setS] = useState(0);
 
   useEffect(() => {
+    setMounted(true); // Tandai bahwa komponen sudah berjalan di browser (client-side)
+    
     const tick = () => {
       let diff = Math.floor((Date.now() - START_DATE.getTime()) / 1000);
+      
+      // Opsional: Mencegah angka minus jika tanggal start ada di masa depan
+      if (diff < 0) diff = 0; 
+
       setD(Math.floor(diff / 86400));
       setH(Math.floor((diff % 86400) / 3600));
       setM(Math.floor((diff % 3600) / 60));
       setS(diff % 60);
     };
+
     tick();
     const id = setInterval(tick, 1000);
     return () => clearInterval(id);
   }, []);
+
+  // Cegah render UI sebelum client siap
+  if (!mounted) {
+    return null; 
+  }
 
   return (
     <section className="w-full py-14 px-4 sm:px-10 bg-white">
@@ -29,7 +43,7 @@ export default function CounterBersama() {
           ✦ sudah bersama ✦
         </p>
         <p className="font-serif text-xl text-pink-900 mb-8">
-          Haris &amp; Ameisha
+          Andi &amp; Ameisha
         </p>
 
         <div className="grid grid-cols-4 gap-3 mb-7">
