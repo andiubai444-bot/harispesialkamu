@@ -6,6 +6,7 @@ import SectionKelima from "../components/SectionKelima/SectionKelima";
 import SectionKeenam from "../components/SectionKeenam/SectionKeenam";
 import SectionKetujuh from "../components/SectionKetujuh/SectionKetujuh";
 import SectionKedelapan from "../components/SectionKedelapan/SectionKedelapan";
+import MusicPlayer from "../components/MusicPlayer";
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
         <SectionKeenam />
         <SectionKedelapan />
         <SectionKetujuh />
+        <MusicPlayer />
       </main>
     </div>
   );
