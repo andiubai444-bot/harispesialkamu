@@ -1,29 +1,26 @@
 "use client";
 import { useEffect, useState } from "react";
 
-const START_DATE = new Date("2026-01-27T00:00:00");
+const START_DATE = new Date("2025-01-27T00:00:00");
 
 export default function CounterBersama() {
-  const [time, setTime] = useState({ d: 0, h: 0, m: 0, s: 0 });
+  const [d, setD] = useState(0);
+  const [h, setH] = useState(0);
+  const [m, setM] = useState(0);
+  const [s, setS] = useState(0);
 
   useEffect(() => {
     const tick = () => {
-      const diff = Math.floor((Date.now() - START_DATE.getTime()) / 1000);
-      setTime({
-        d: Math.floor(diff / 86400),
-        h: Math.floor((diff % 86400) / 3600),
-        m: Math.floor((diff % 3600) / 60),
-        s: diff % 60,
-      });
+      let diff = Math.floor((Date.now() - START_DATE.getTime()) / 1000);
+      setD(Math.floor(diff / 86400));
+      setH(Math.floor((diff % 86400) / 3600));
+      setM(Math.floor((diff % 3600) / 60));
+      setS(diff % 60);
     };
     tick();
     const id = setInterval(tick, 1000);
     return () => clearInterval(id);
   }, []);
-
-  const pad = (n: number) => {
-  return String(n).padStart(2, "0");
-};
 
   return (
     <section className="w-full py-14 px-4 sm:px-10 bg-white">
@@ -32,25 +29,26 @@ export default function CounterBersama() {
           ✦ sudah bersama ✦
         </p>
         <p className="font-serif text-xl text-pink-900 mb-8">
-          Andi &amp; Ameisha
+          Haris &amp; Ameisha
         </p>
 
         <div className="grid grid-cols-4 gap-3 mb-7">
-          {[
-            { val: time.d, label: "Hari" },
-            { val: time.h, label: "Jam" },
-            { val: time.m, label: "Menit" },
-            { val: time.s, label: "Detik" },
-          ].map(({ val, label }) => (
-            <div key={label} className="bg-pink-50 rounded-2xl py-5 px-2">
-              <p className="font-serif text-3xl sm:text-4xl text-pink-900 leading-none">
-                {label === "Hari" ? val : pad(val)}
-              </p>
-              <p className="text-xs tracking-widest text-pink-600 uppercase mt-2">
-                {label}
-              </p>
-            </div>
-          ))}
+          <div className="bg-pink-50 rounded-2xl py-5 px-2">
+            <p className="font-serif text-3xl sm:text-4xl text-pink-900 leading-none">{d}</p>
+            <p className="text-xs tracking-widest text-pink-600 uppercase mt-2">Hari</p>
+          </div>
+          <div className="bg-pink-50 rounded-2xl py-5 px-2">
+            <p className="font-serif text-3xl sm:text-4xl text-pink-900 leading-none">{String(h).padStart(2, "0")}</p>
+            <p className="text-xs tracking-widest text-pink-600 uppercase mt-2">Jam</p>
+          </div>
+          <div className="bg-pink-50 rounded-2xl py-5 px-2">
+            <p className="font-serif text-3xl sm:text-4xl text-pink-900 leading-none">{String(m).padStart(2, "0")}</p>
+            <p className="text-xs tracking-widest text-pink-600 uppercase mt-2">Menit</p>
+          </div>
+          <div className="bg-pink-50 rounded-2xl py-5 px-2">
+            <p className="font-serif text-3xl sm:text-4xl text-pink-900 leading-none">{String(s).padStart(2, "0")}</p>
+            <p className="text-xs tracking-widest text-pink-600 uppercase mt-2">Detik</p>
+          </div>
         </div>
 
         <div className="h-px bg-gradient-to-r from-transparent via-pink-300 to-transparent mb-5" />
