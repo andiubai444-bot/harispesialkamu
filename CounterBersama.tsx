@@ -1,0 +1,59 @@
+"use client";
+import { useEffect, useState } from "react";
+
+const START_DATE = new Date("2026-01-27T00:00:00");
+
+export default function CounterBersama() {
+  const [d, setD] = useState(0);
+  const [h, setH] = useState(0);
+  const [m, setM] = useState(0);
+  const [s, setS] = useState(0);
+
+  useEffect(() => {
+    const tick = () => {
+      let diff = Math.floor((Date.now() - START_DATE.getTime()) / 1000);
+      setD(Math.floor(diff / 86400));
+      setH(Math.floor((diff % 86400) / 3600));
+      setM(Math.floor((diff % 3600) / 60));
+      setS(diff % 60);
+    };
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <section className="w-full py-14 px-4 sm:px-10 bg-white">
+      <div className="max-w-lg mx-auto text-center">
+        <p className="text-xs tracking-widest text-pink-600 uppercase mb-2">
+          ✦ sudah bersama ✦
+        </p>
+        <p className="font-serif text-xl text-pink-900 mb-8">
+          Andi &amp; Ameisha
+        </p>
+
+        <div className="grid grid-cols-4 gap-3 mb-7">
+          <div className="bg-pink-50 rounded-2xl py-5 px-2">
+            <p className="font-serif text-3xl sm:text-4xl text-pink-900 leading-none">{d}</p>
+            <p className="text-xs tracking-widest text-pink-600 uppercase mt-2">Hari</p>
+          </div>
+          <div className="bg-pink-50 rounded-2xl py-5 px-2">
+            <p className="font-serif text-3xl sm:text-4xl text-pink-900 leading-none">{String(h).padStart(2, "0")}</p>
+            <p className="text-xs tracking-widest text-pink-600 uppercase mt-2">Jam</p>
+          </div>
+          <div className="bg-pink-50 rounded-2xl py-5 px-2">
+            <p className="font-serif text-3xl sm:text-4xl text-pink-900 leading-none">{String(m).padStart(2, "0")}</p>
+            <p className="text-xs tracking-widest text-pink-600 uppercase mt-2">Menit</p>
+          </div>
+          <div className="bg-pink-50 rounded-2xl py-5 px-2">
+            <p className="font-serif text-3xl sm:text-4xl text-pink-900 leading-none">{String(s).padStart(2, "0")}</p>
+            <p className="text-xs tracking-widest text-pink-600 uppercase mt-2">Detik</p>
+          </div>
+        </div>
+
+        <div className="h-px bg-gradient-to-r from-transparent via-pink-300 to-transparent mb-5" />
+        <p className="text-sm text-pink-600">sejak 27 Januari 2026 ♡</p>
+      </div>
+    </section>
+  );
+}
