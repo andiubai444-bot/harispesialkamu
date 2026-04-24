@@ -1,7 +1,7 @@
 const playlist = [
   {
     title: "Lagu 1",
-    artist: "Prettiest Thing I've Ever Seen - Reality Club",
+    artist: "Prettiest Thing I've Ever Seen - Lany",
     reason:
       "Lagu ini bakal kita isi sama lagu yang paling ngingetin aku ke kamu.",
   },
