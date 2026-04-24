@@ -64,7 +64,7 @@ export default function SectionKedelapan() {
           <div className="overflow-hidden rounded-2xl border border-pink-100 bg-pink-50/60 shadow-sm shadow-pink-100">
             <iframe
               className="w-full h-[352px]"
-              src="https://open.spotify.com/playlist/28Y1n80qNSM0uyjBCbenMs?si=fn2gBKipTgWv-RYZHaX0hw"
+              src="https://open.spotify.com/embed/playlist/28Y1n80qNSM0uyjBCbenMs?utm_source=generator"
               allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
               loading="lazy"
             ></iframe>
