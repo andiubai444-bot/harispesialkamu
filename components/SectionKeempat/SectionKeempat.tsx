@@ -14,13 +14,13 @@ const memories = [
     imageSrc: "/Foto3.jpg",
   },
   {
-    title: "Kenangan 3",
+    title: "Foto 3",
     caption:
       "Momen Idul Fitri.",
     imageSrc: "/Foto4.jpg",
   },
   {
-    title: "Kenangan 4",
+    title: "Foto 4",
     caption: "Ini foto yang menurut aku kamu cantik banget banget banget",
     imageSrc: "/Foto5.jpg",
   },
