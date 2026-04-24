@@ -52,7 +52,7 @@ export default function CounterBersama() {
         </div>
 
         <div className="h-px bg-gradient-to-r from-transparent via-pink-300 to-transparent mb-5" />
-        <p className="text-sm text-pink-600">sejak 27 Januari 2025 ♡</p>
+        <p className="text-sm text-pink-600">sejak 27 Januari 2026 ♡</p>
       </div>
     </section>
   );
