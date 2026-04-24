@@ -18,7 +18,7 @@ export default function HeroSection() {
         <div className="flex-1 text-center sm:text-left animate-fade-in-up">
           <p className="inline-flex items-center gap-2 rounded-full bg-pink-100/80 px-4 py-1 text-[11px] sm:text-xs font-medium tracking-[0.25em] text-pink-500 uppercase mb-3">
             <span className="h-2 w-2 rounded-full bg-pink-400 animate-pulse" />
-            happy 20th birthday
+            happy 21th birthday
           </p>
           <h1 className="text-4xl sm:text-5xl font-bold text-pink-900 mb-4 leading-tight">
             Selamat ulang tahun yang ke-21, Ameisha Nadilah Sayangkuu  ♡
