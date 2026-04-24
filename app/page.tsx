@@ -8,6 +8,7 @@ import SectionKetujuh from "../components/SectionKetujuh/SectionKetujuh";
 import SectionKedelapan from "../components/SectionKedelapan/SectionKedelapan";
 import MusicPlayer from "../components/MusicPlayer";
 import Confetti from "../components/Confetti";
+import CounterBersama from "../components/CounterBersama";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
         <SectionKetiga />
         <SectionKeempat />
         <SectionKelima />
+        <CounterBersama />
         <SectionKeenam />
         <SectionKedelapan />
         <SectionKetujuh />
