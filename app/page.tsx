@@ -7,6 +7,7 @@ import SectionKeenam from "../components/SectionKeenam/SectionKeenam";
 import SectionKetujuh from "../components/SectionKetujuh/SectionKetujuh";
 import SectionKedelapan from "../components/SectionKedelapan/SectionKedelapan";
 import MusicPlayer from "../components/MusicPlayer";
+import Confetti from "../components/Confetti";
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
         <SectionKedelapan />
         <SectionKetujuh />
         <MusicPlayer />
+        <Confetti />
       </main>
     </div>
   );
