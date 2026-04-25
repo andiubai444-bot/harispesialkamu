@@ -11,6 +11,7 @@ import Confetti from "../components/Confetti";
 import CounterBersama from "../components/CounterBersama";
 import Particles from "../components/Particles";
 import IntroScreen from "../components/IntroScreen";
+import PelukanVirtual from "../components/PelukanVirtual";
 
 export default function Home() {
   return (
@@ -28,6 +29,7 @@ export default function Home() {
         <SectionKelima />
         <CounterBersama />
         <SectionKeenam />
+        <PelukanVirtual />
         <SectionKedelapan />
         <SectionKetujuh />
         <MusicPlayer />
