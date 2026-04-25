@@ -4,9 +4,8 @@ import Image from "next/image";
 
 const START_DATE = new Date("2026-01-27T00:00:00");
 
-// Ganti nama file sesuai foto yang kamu upload ke folder public/
-const FOTO_AMEISHA = "/FotoKamu.jpg"; // foto dia (Pontianak)
-const FOTO_ANDI = "/FotoKu.jpeg";       // foto kamu (Balikpapan)
+const FOTO_AMEISHA = "/foto-ameisha.jpg";
+const FOTO_ANDI = "/foto-andi.jpg";
 
 export default function CounterBersama() {
   const [d, setD] = useState(0);
@@ -17,7 +16,7 @@ export default function CounterBersama() {
 
   useEffect(() => {
     const tick = () => {
-      let diff = Math.floor((Date.now() - START_DATE.getTime()) / 1000);
+      const diff = Math.floor((Date.now() - START_DATE.getTime()) / 1000);
       setD(Math.floor(diff / 86400));
       setH(Math.floor((diff % 86400) / 3600));
       setM(Math.floor((diff % 3600) / 60));
@@ -94,9 +93,9 @@ export default function CounterBersama() {
                 fill="none"
                 stroke="#f9a8d4"
                 strokeWidth="2"
-                strokeDasharray="6 5"
+                strokeDasharray="220"
+                strokeDashoffset={animated ? 0 : 220}
                 style={{
-                  strokeDashoffset: animated ? 0 : 200,
                   transition: "stroke-dashoffset 1.8s ease",
                 }}
               />
