@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 
 const START_DATE = new Date("2026-01-27T00:00:00");
-
 const FOTO_AMEISHA = "/FotoKamu.jpg";
 const FOTO_ANDI = "/FotoKu.jpeg";
 
@@ -28,8 +27,12 @@ export default function CounterBersama() {
   }, []);
 
   useEffect(() => {
-    const t = setTimeout(() => setAnimated(true), 300);
-    return () => clearTimeout(t);
+    const t1 = setTimeout(() => setAnimated(false), 50);
+    const t2 = setTimeout(() => setAnimated(true), 200);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
   }, []);
 
   return (
@@ -74,39 +77,47 @@ export default function CounterBersama() {
           {/* Pontianak - Foto Ameisha */}
           <div className="flex flex-col items-center z-10">
             <div className="relative w-14 h-14 rounded-full border-[3px] border-pink-300 shadow-md shadow-pink-200 overflow-hidden mb-2">
-              <Image
-                src={FOTO_AMEISHA}
-                alt="Ameisha"
-                fill
-                className="object-cover"
-              />
+              <Image src={FOTO_AMEISHA} alt="Ameisha" fill className="object-cover" />
             </div>
             <p className="font-serif text-sm text-pink-900 font-semibold">Pontianak</p>
             <p className="text-xs text-pink-500 mt-0.5">Kamu di sini</p>
           </div>
 
           {/* Garis putus-putus */}
-          <div className="flex-1 mx-3 flex flex-col items-center relative">
-            <svg viewBox="0 0 200 60" className="w-full" style={{ overflow: "visible" }}>
+          <div className="flex-1 mx-3 flex flex-col items-center gap-2">
+            <svg
+              viewBox="0 0 200 50"
+              className="w-full"
+              style={{ overflow: "visible" }}
+            >
+              {/* Garis statis dulu sebagai background */}
+              <path
+                d="M 0,30 Q 100,5 200,30"
+                fill="none"
+                stroke="#fce7f3"
+                strokeWidth="2"
+                strokeDasharray="6 5"
+              />
+              {/* Garis animasi di atasnya */}
               <path
                 d="M 0,30 Q 100,5 200,30"
                 fill="none"
                 stroke="#f9a8d4"
                 strokeWidth="2"
+                strokeDasharray="6 5"
+                strokeDashoffset={animated ? "0" : "220"}
                 style={{
-                  strokeDasharray: 220,
-                  strokeDashoffset: animated ? 0 : 220,
-                  transition: "stroke-dashoffset 1.8s ease",
+                  transition: "stroke-dashoffset 2s ease 0.2s",
                 }}
               />
               <text
                 x="100"
-                y="10"
+                y="8"
                 textAnchor="middle"
-                fontSize="16"
+                fontSize="14"
                 style={{
                   opacity: animated ? 1 : 0,
-                  transition: "opacity 0.5s ease 1.5s",
+                  transition: "opacity 0.5s ease 1.8s",
                 }}
               >
                 ✈️
@@ -118,7 +129,7 @@ export default function CounterBersama() {
               style={{
                 opacity: animated ? 1 : 0,
                 transform: animated ? "translateY(0)" : "translateY(8px)",
-                transition: "opacity 0.5s ease 1.8s, transform 0.5s ease 1.8s",
+                transition: "opacity 0.5s ease 2s, transform 0.5s ease 2s",
               }}
             >
               <p className="text-xs font-semibold text-pink-700">± 892 km</p>
@@ -128,12 +139,7 @@ export default function CounterBersama() {
           {/* Balikpapan - Foto Andi */}
           <div className="flex flex-col items-center z-10">
             <div className="relative w-14 h-14 rounded-full border-[3px] border-rose-300 shadow-md shadow-rose-200 overflow-hidden mb-2">
-              <Image
-                src={FOTO_ANDI}
-                alt="Andi"
-                fill
-                className="object-cover"
-              />
+              <Image src={FOTO_ANDI} alt="Andi" fill className="object-cover" />
             </div>
             <p className="font-serif text-sm text-pink-900 font-semibold">Balikpapan</p>
             <p className="text-xs text-pink-500 mt-0.5">Aku di sini</p>
