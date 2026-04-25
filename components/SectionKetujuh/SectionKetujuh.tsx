@@ -28,7 +28,7 @@ const memories = [
   },
   {
     title: "Kenangan 4",
-    caption: "(Placeholder) Nanti kita isi lagi sama memori baru.",
+    caption: "Nanti kita isi lagi sama memori baru.",
     imageSrc: "/Foto5.jpg",
   },
 ];
