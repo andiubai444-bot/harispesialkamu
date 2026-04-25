@@ -28,7 +28,7 @@ export default function SectionKedelapan() {
     <section className="w-full py-16 px-4 sm:px-10 bg-white">
       <div className="max-w-5xl mx-auto">
         <h2 className="text-2xl sm:text-3xl font-bold text-pink-900 mb-6">
-          Our Playlist
+          Lagu Favorit Kita
         </h2>
         <p className="text-pink-700 text-sm sm:text-base mb-6">
           Ini kumpulan lagu-lagu yang entah kenapa selalu bikin aku inget kamu
