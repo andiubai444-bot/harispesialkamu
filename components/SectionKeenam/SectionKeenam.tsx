@@ -60,8 +60,8 @@ export default function SectionKeenam() {
 
             <div className="space-y-3 text-left">
               <p className="text-sm sm:text-base text-pink-900 leading-relaxed">
-                Terima kasih sudah jadi kamu selama ini, dengan semua versi kamu —
-                yang lagi seneng, lagi sedih, lagi cape, lagi heboh — semuanya.
+                Terima kasih sudah jadi kamu selama ini, dengan semua versi kamu
+                yang lagi seneng, lagi sedih, lagi cape, lagi heboh semuanya.
               </p>
               <p className="text-sm sm:text-base text-pink-900 leading-relaxed">
                 Di umur 21 ini, aku cuma pengin kamu tahu kalau ada seseorang di
