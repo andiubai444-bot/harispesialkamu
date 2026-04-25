@@ -6,7 +6,7 @@ const START_DATE = new Date("2026-01-27T00:00:00");
 
 // Ganti nama file sesuai foto yang kamu upload ke folder public/
 const FOTO_AMEISHA = "/FotoKamu.jpg"; // foto dia (Pontianak)
-const FOTO_ANDI = "/FotoAku.jpeg";       // foto kamu (Balikpapan)
+const FOTO_ANDI = "/FotoKu.jpeg";       // foto kamu (Balikpapan)
 
 export default function CounterBersama() {
   const [d, setD] = useState(0);
