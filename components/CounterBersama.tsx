@@ -4,8 +4,8 @@ import Image from "next/image";
 
 const START_DATE = new Date("2026-01-27T00:00:00");
 
-const FOTO_AMEISHA = "/foto-ameisha.jpg";
-const FOTO_ANDI = "/foto-andi.jpg";
+const FOTO_AMEISHA = "/FotoKamu.jpg";
+const FOTO_ANDI = "/FotoKu.jpeg";
 
 export default function CounterBersama() {
   const [d, setD] = useState(0);
