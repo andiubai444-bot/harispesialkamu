@@ -5,24 +5,35 @@ import { useEffect, useState } from "react";
 const LINE1 = "Selamat ulang tahun yang ke-21,";
 const LINE2 = "Ameisha Nadilah Sayangkuu ♡";
 
+// Delay sesuai durasi IntroScreen (sekitar 5.5 detik)
+const TYPING_DELAY = 5500;
+
 export default function HeroSection() {
+  const [started, setStarted] = useState(false);
   const [text1, setText1] = useState("");
   const [text2, setText2] = useState("");
   const [line1Done, setLine1Done] = useState(false);
   const [cursor1, setCursor1] = useState(true);
   const [cursor2, setCursor2] = useState(true);
 
+  // Tunggu IntroScreen selesai dulu baru mulai typing
+  useEffect(() => {
+    const t = setTimeout(() => setStarted(true), TYPING_DELAY);
+    return () => clearTimeout(t);
+  }, []);
+
   // Typing baris pertama
   useEffect(() => {
+    if (!started) return;
     if (text1.length < LINE1.length) {
       const t = setTimeout(() => setText1(LINE1.slice(0, text1.length + 1)), 55);
       return () => clearTimeout(t);
     } else {
       setLine1Done(true);
     }
-  }, [text1]);
+  }, [started, text1]);
 
-  // Typing baris kedua (mulai setelah baris 1 selesai)
+  // Typing baris kedua
   useEffect(() => {
     if (!line1Done) return;
     if (text2.length < LINE2.length) {
@@ -63,7 +74,7 @@ export default function HeroSection() {
           {/* Judul dengan efek typing */}
           <h1 className="text-4xl sm:text-5xl font-bold text-pink-900 mb-4 leading-tight min-h-[7rem] sm:min-h-[6rem]">
             {text1}
-            {!line1Done && (
+            {started && !line1Done && (
               <span style={{ opacity: cursor1 ? 1 : 0, transition: "opacity 0.1s" }}>|</span>
             )}
             {line1Done && (
