@@ -9,11 +9,13 @@ import SectionKedelapan from "../components/SectionKedelapan/SectionKedelapan";
 import MusicPlayer from "../components/MusicPlayer";
 import Confetti from "../components/Confetti";
 import CounterBersama from "../components/CounterBersama";
+import Particles from "../components/Particles";
 
 export default function Home() {
   return (
     <div className="min-h-screen w-full bg-gradient-to-b from-pink-100 via-white to-pink-50 text-pink-900 font-sans">
       <main className="mx-auto flex min-h-screen w-full max-w-6xl flex-col">
+        <Particles />
         <HeroSection />
         <SectionKedua />
         <SectionKetiga />
