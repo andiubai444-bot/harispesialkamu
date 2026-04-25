@@ -1,7 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 const START_DATE = new Date("2026-01-27T00:00:00");
+
+// Ganti nama file sesuai foto yang kamu upload ke folder public/
+const FOTO_AMEISHA = "/foto-ameisha.jpg"; // foto dia (Pontianak)
+const FOTO_ANDI = "/foto-andi.jpg";       // foto kamu (Balikpapan)
 
 export default function CounterBersama() {
   const [d, setD] = useState(0);
@@ -23,7 +28,6 @@ export default function CounterBersama() {
     return () => clearInterval(id);
   }, []);
 
-  // Animasi garis putus-putus setelah mount
   useEffect(() => {
     const t = setTimeout(() => setAnimated(true), 300);
     return () => clearTimeout(t);
@@ -62,42 +66,40 @@ export default function CounterBersama() {
         <p className="text-sm text-pink-600 mb-12">sejak 27 Januari 2026 ♡</p>
 
         {/* Jarak Kota */}
-        <p className="text-xs tracking-widest text-pink-600 uppercase mb-6">
+        <p className="text-xs tracking-widest text-pink-600 uppercase mb-8">
           ✦ jarak kita ✦
         </p>
 
         <div className="relative flex items-center justify-between px-2">
 
-          {/* Kota Kiri - Pontianak */}
+          {/* Pontianak - Foto Ameisha */}
           <div className="flex flex-col items-center z-10">
-            <div className="w-12 h-12 rounded-full bg-pink-100 border-2 border-pink-300 flex items-center justify-center text-xl mb-2 shadow-sm">
-              🏙️
+            <div className="relative w-14 h-14 rounded-full border-[3px] border-pink-300 shadow-md shadow-pink-200 overflow-hidden mb-2">
+              <Image
+                src={FOTO_AMEISHA}
+                alt="Ameisha"
+                fill
+                className="object-cover"
+              />
             </div>
             <p className="font-serif text-sm text-pink-900 font-semibold">Pontianak</p>
             <p className="text-xs text-pink-500 mt-0.5">Kamu di sini</p>
           </div>
 
-          {/* Garis putus-putus tengah */}
-          <div className="flex-1 mx-3 flex flex-col items-center gap-1 relative">
-            {/* SVG garis putus-putus melengkung */}
-            <svg
-              viewBox="0 0 200 60"
-              className="w-full"
-              style={{ overflow: "visible" }}
-            >
+          {/* Garis putus-putus */}
+          <div className="flex-1 mx-3 flex flex-col items-center relative">
+            <svg viewBox="0 0 200 60" className="w-full" style={{ overflow: "visible" }}>
               <path
                 d="M 0,30 Q 100,5 200,30"
                 fill="none"
                 stroke="#f9a8d4"
                 strokeWidth="2"
                 strokeDasharray="6 5"
-                strokeDashoffset={animated ? 0 : 200}
                 style={{
                   strokeDashoffset: animated ? 0 : 200,
                   transition: "stroke-dashoffset 1.8s ease",
                 }}
               />
-              {/* Pesawat di tengah garis */}
               <text
                 x="100"
                 y="10"
@@ -112,7 +114,6 @@ export default function CounterBersama() {
               </text>
             </svg>
 
-            {/* Label jarak */}
             <div
               className="bg-pink-50 border border-pink-200 rounded-full px-3 py-1"
               style={{
@@ -125,10 +126,15 @@ export default function CounterBersama() {
             </div>
           </div>
 
-          {/* Kota Kanan - Balikpapan */}
+          {/* Balikpapan - Foto Andi */}
           <div className="flex flex-col items-center z-10">
-            <div className="w-12 h-12 rounded-full bg-rose-100 border-2 border-rose-300 flex items-center justify-center text-xl mb-2 shadow-sm">
-              🏙️
+            <div className="relative w-14 h-14 rounded-full border-[3px] border-rose-300 shadow-md shadow-rose-200 overflow-hidden mb-2">
+              <Image
+                src={FOTO_ANDI}
+                alt="Andi"
+                fill
+                className="object-cover"
+              />
             </div>
             <p className="font-serif text-sm text-pink-900 font-semibold">Balikpapan</p>
             <p className="text-xs text-pink-500 mt-0.5">Aku di sini</p>
