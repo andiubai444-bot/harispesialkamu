@@ -5,10 +5,10 @@ type Heart = {
   id: number;
   x: number;
   y: number;
+  dx: number;
+  dy: number;
   size: number;
   color: string;
-  angle: number;
-  speed: number;
 };
 
 const COLORS = ["#f9a8d4", "#fda4af", "#fbcfe8", "#ff85a1", "#fcd5e3", "#fde68a"];
@@ -23,20 +23,26 @@ export default function PelukanVirtual() {
     setCounter((c) => c + 1);
     setTimeout(() => setClicked(false), 300);
 
-    const newHearts: Heart[] = Array.from({ length: 12 }, (_, i) => ({
-      id: Date.now() + i,
-      x: 50 + (Math.random() - 0.5) * 10,
-      y: 50 + (Math.random() - 0.5) * 10,
-      size: Math.random() * 20 + 14,
-      color: COLORS[Math.floor(Math.random() * COLORS.length)],
-      angle: (i / 12) * 360 + Math.random() * 20,
-      speed: Math.random() * 0.8 + 0.6,
-    }));
+    const newHearts: Heart[] = Array.from({ length: 12 }, (_, i) => {
+      const angle = (i / 12) * Math.PI * 2;
+      const dist = Math.random() * 60 + 60;
+      return {
+        id: Date.now() + i,
+        x: 0,
+        y: 0,
+        dx: Math.cos(angle) * dist,
+        dy: Math.sin(angle) * dist,
+        size: Math.random() * 14 + 12,
+        color: COLORS[Math.floor(Math.random() * COLORS.length)],
+      };
+    });
 
     setHearts((prev) => [...prev, ...newHearts]);
     setTimeout(() => {
-      setHearts((prev) => prev.filter((h) => !newHearts.find((n) => n.id === h.id)));
-    }, 2000);
+      setHearts((prev) =>
+        prev.filter((h) => !newHearts.find((n) => n.id === h.id))
+      );
+    }, 1800);
   }, []);
 
   return (
@@ -53,21 +59,48 @@ export default function PelukanVirtual() {
         </p>
 
         {/* Area hati terbang */}
-        <div className="relative flex justify-center items-center mb-6">
-          <div className="relative w-48 h-48">
+        <div className="flex justify-center items-center mb-6">
+          <div className="relative flex justify-center items-center w-48 h-48">
+
             {/* Hati yang berterbangan */}
             {hearts.map((heart) => (
               <div
                 key={heart.id}
                 style={{
                   position: "absolute",
-                  left: `${heart.x}%`,
-                  top: `${heart.y}%`,
+                  top: "50%",
+                  left: "50%",
                   fontSize: heart.size,
                   color: heart.color,
-                  animation: `flyHeart ${heart.speed * 1.5}s ease-out forwards`,
-                  transform: `rotate(${heart.angle}deg)`,
                   pointerEvents: "none",
+                  animation: "none",
+                  transition: "transform 1.6s ease-out, opacity 1.6s ease-out",
+                  transform: `translate(${heart.dx}px, ${heart.dy}px)`,
+                  opacity: 0,
+                  marginTop: -heart.size / 2,
+                  marginLeft: -heart.size / 2,
+                }}
+              >
+                ♥
+              </div>
+            ))}
+
+            {/* Hati yang baru muncul (frame awal) */}
+            {hearts.map((heart) => (
+              <div
+                key={`init-${heart.id}`}
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  fontSize: heart.size,
+                  color: heart.color,
+                  pointerEvents: "none",
+                  animation: `flyOut 1.6s ease-out forwards`,
+                  marginTop: -heart.size / 2,
+                  marginLeft: -heart.size / 2,
+                  ["--dx" as string]: `${heart.dx}px`,
+                  ["--dy" as string]: `${heart.dy}px`,
                 }}
               >
                 ♥
@@ -78,11 +111,10 @@ export default function PelukanVirtual() {
             <button
               onClick={sendHug}
               style={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: `translate(-50%, -50%) scale(${clicked ? 0.88 : 1})`,
+                transform: clicked ? "scale(0.88)" : "scale(1)",
                 transition: "transform 0.15s ease",
+                position: "relative",
+                zIndex: 10,
               }}
               className="w-24 h-24 rounded-full bg-gradient-to-br from-pink-400 to-rose-400 shadow-lg shadow-pink-300/60 flex flex-col items-center justify-center text-white border-4 border-white hover:shadow-xl hover:shadow-pink-300/80 transition-shadow"
             >
@@ -94,52 +126,39 @@ export default function PelukanVirtual() {
 
         {/* Counter pelukan */}
         {counter > 0 && (
-          <div
-            className="inline-flex items-center gap-2 bg-white border border-pink-200 rounded-full px-5 py-2 shadow-sm"
-            style={{ animation: "fadeIn 0.3s ease" }}
-          >
+          <div className="inline-flex items-center gap-2 bg-white border border-pink-200 rounded-full px-5 py-2 shadow-sm">
             <span className="text-pink-400 text-sm">🤗</span>
             <p className="text-sm text-pink-700 font-serif">
-              {counter === 1
-                ? "1 pelukan terkirim ♡"
-                : `${counter} pelukan terkirim ♡`}
+              {counter === 1 ? "1 pelukan terkirim ♡" : `${counter} pelukan terkirim ♡`}
             </p>
           </div>
         )}
 
-        {/* Pesan setelah beberapa kali */}
         {counter >= 5 && (
-          <p
-            className="text-xs text-pink-400 mt-3 italic"
-            style={{ animation: "fadeIn 0.5s ease" }}
-          >
+          <p className="text-xs text-pink-400 mt-3 italic">
             Hehe kamu suka ya dipeluk 🥺
           </p>
         )}
         {counter >= 10 && (
-          <p
-            className="text-xs text-pink-400 mt-1 italic"
-            style={{ animation: "fadeIn 0.5s ease" }}
-          >
+          <p className="text-xs text-pink-400 mt-1 italic">
             Oke oke aku peluk terus deh ♡
           </p>
         )}
       </div>
 
       <style jsx>{`
-        @keyframes flyHeart {
+        @keyframes flyOut {
           0% {
+            transform: translate(0, 0) scale(1);
             opacity: 1;
-            transform: rotate(var(--angle)) translate(0, 0) scale(1);
+          }
+          80% {
+            opacity: 0.8;
           }
           100% {
+            transform: translate(var(--dx), var(--dy)) scale(0.3);
             opacity: 0;
-            transform: rotate(var(--angle)) translate(0, -120px) scale(0.4);
           }
-        }
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(6px); }
-          to { opacity: 1; transform: translateY(0); }
         }
       `}</style>
     </section>
