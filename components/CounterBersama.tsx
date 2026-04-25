@@ -93,9 +93,9 @@ export default function CounterBersama() {
                 fill="none"
                 stroke="#f9a8d4"
                 strokeWidth="2"
-                strokeDasharray="220"
-                strokeDashoffset={animated ? 0 : 220}
                 style={{
+                  strokeDasharray: 220,
+                  strokeDashoffset: animated ? 0 : 220,
                   transition: "stroke-dashoffset 1.8s ease",
                 }}
               />
