@@ -10,10 +10,15 @@ import MusicPlayer from "../components/MusicPlayer";
 import Confetti from "../components/Confetti";
 import CounterBersama from "../components/CounterBersama";
 import Particles from "../components/Particles";
+import IntroScreen from "../components/IntroScreen";
 
 export default function Home() {
   return (
     <div className="min-h-screen w-full bg-gradient-to-b from-pink-100 via-white to-pink-50 text-pink-900 font-sans">
+
+      {/* Intro screen muncul pertama sebelum semua konten */}
+      <IntroScreen />
+
       <main className="mx-auto flex min-h-screen w-full max-w-6xl flex-col">
         <Particles />
         <HeroSection />
@@ -28,6 +33,7 @@ export default function Home() {
         <MusicPlayer />
         <Confetti />
       </main>
+
     </div>
   );
 }
