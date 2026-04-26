@@ -6,7 +6,6 @@ import SectionKelima from "../components/SectionKelima/SectionKelima";
 import SectionKeenam from "../components/SectionKeenam/SectionKeenam";
 import SectionKetujuh from "../components/SectionKetujuh/SectionKetujuh";
 import SectionKedelapan from "../components/SectionKedelapan/SectionKedelapan";
-import SpotifySection from "../components/SpotifySection";
 import MusicPlayer from "../components/MusicPlayer";
 import Confetti from "../components/Confetti";
 import CounterBersama from "../components/CounterBersama";
@@ -31,9 +30,6 @@ export default function Home() {
 
         <QuoteTransisi quote="Setiap foto adalah bukti kalau kita punya cerita yang layak dikenang." />
         <SectionKeempat />
-
-        <QuoteTransisi quote="Beberapa lagu itu bukan cuma musik, tapi pengingat tentang kamu." />
-        <SpotifySection />
 
         <QuoteTransisi quote="Detik demi detik, aku bersyukur bisa ngitung semuanya bareng kamu." />
         <CounterBersama />
