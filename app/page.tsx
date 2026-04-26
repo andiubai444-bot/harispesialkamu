@@ -6,6 +6,7 @@ import SectionKelima from "../components/SectionKelima/SectionKelima";
 import SectionKeenam from "../components/SectionKeenam/SectionKeenam";
 import SectionKetujuh from "../components/SectionKetujuh/SectionKetujuh";
 import SectionKedelapan from "../components/SectionKedelapan/SectionKedelapan";
+import SpotifySection from "../components/SpotifySection";
 import MusicPlayer from "../components/MusicPlayer";
 import Confetti from "../components/Confetti";
 import CounterBersama from "../components/CounterBersama";
@@ -16,26 +17,23 @@ import PelukanVirtual from "../components/PelukanVirtual";
 export default function Home() {
   return (
     <div className="min-h-screen w-full bg-gradient-to-b from-pink-100 via-white to-pink-50 text-pink-900 font-sans">
-
-      {/* Intro screen muncul pertama sebelum semua konten */}
       <IntroScreen />
-
       <main className="mx-auto flex min-h-screen w-full max-w-6xl flex-col">
         <Particles />
         <HeroSection />
         <SectionKedua />
         <SectionKetiga />
         <SectionKeempat />
-        <SectionKelima />
+        <SpotifySection />
         <CounterBersama />
+        <SectionKelima />
         <SectionKeenam />
-        <PelukanVirtual />
         <SectionKedelapan />
+        <PelukanVirtual />
         <SectionKetujuh />
         <MusicPlayer />
         <Confetti />
       </main>
-
     </div>
   );
 }
