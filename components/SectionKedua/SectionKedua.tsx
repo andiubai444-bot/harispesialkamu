@@ -42,7 +42,8 @@ export default function SectionKedua() {
             <p className="mt-3 text-sm sm:text-base text-pink-900">
               Di usia baru ini, aku cuma pengen kamu lebih bahagia, lebih tenang
               sama diri sendiri, dikelilingi orang-orang baik, dan selalu
-              ngerasa cukup, apapun yang lagi kamu jalanin.
+              ngerasa cukup, apapun yang lagi kamu jalanin. jangan merasa harus lari sendirian ya.
+              Pelan-pelan saja, nikmati prosesnya, dan ingat kalau aku selalu ada di baris paling depan buat dukung kamu.
             </p>
           </div>
 
