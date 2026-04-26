@@ -23,7 +23,6 @@ export default function Home() {
         <SectionKedua />
         <SectionKetiga />
         <SectionKeempat />
-        <SpotifySection />
         <CounterBersama />
         <SectionKelima />
         <SectionKeenam />
