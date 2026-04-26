@@ -1,8 +1,80 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 
 export default function SectionKeenam() {
   const [opened, setOpened] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const modal = (
+    <div
+      className="fixed inset-0 z-[9999] flex items-center justify-center px-4"
+      style={{ backgroundColor: "rgba(50, 5, 20, 0.65)" }}
+      onClick={() => setOpened(false)}
+    >
+      <div
+        className="relative bg-pink-50 border border-pink-200 rounded-3xl p-8 sm:p-10 max-w-lg w-full text-center shadow-2xl max-h-[90vh] overflow-y-auto"
+        style={{ animation: "popIn 0.45s cubic-bezier(0.34,1.56,0.64,1) both" }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          onClick={() => setOpened(false)}
+          className="absolute top-4 right-5 text-pink-400 hover:text-pink-700 text-xl transition-colors"
+        >
+          ✕
+        </button>
+
+        <div className="text-4xl mb-3">💌</div>
+
+        <p className="font-serif text-lg font-semibold text-pink-900 mb-4">
+          Untuk Ameisha Nadilah Sayangkuu
+        </p>
+
+        <div className="h-px bg-gradient-to-r from-transparent via-pink-300 to-transparent mb-5" />
+
+        <div className="space-y-3 text-left">
+          <p className="text-sm sm:text-base text-pink-900 leading-relaxed">
+            Terima kasih sudah jadi kamu selama ini, dengan semua versi kamu
+            yang lagi seneng, lagi sedih, lagi cape, lagi heboh semuanya.
+          </p>
+          <p className="text-sm sm:text-base text-pink-900 leading-relaxed">
+            Di umur 21 ini, aku cuma pengin kamu tahu kalau ada seseorang di
+            sini yang bener-bener sayang sama kamu dan bangga sama kamu.
+          </p>
+          <p className="text-sm sm:text-base text-pink-900 leading-relaxed">
+            Makasih udah ada, makasih udah mau dikenal, makasih udah jadi kamu
+            yang aku kenal dan sayangin. Kamu layak bahagia, bukan cuma hari
+            ini tapi setiap harinya.
+          </p>
+        </div>
+
+        <div className="h-px bg-gradient-to-r from-transparent via-pink-300 to-transparent my-5" />
+
+        <p className="font-serif text-sm sm:text-base text-pink-700 text-right">
+          Selamat ulang tahun yang ke-21, Sayang.<br />
+          Semoga tahun ini lebih lembut buat kamu. ♡
+        </p>
+
+        <button
+          onClick={() => setOpened(false)}
+          className="mt-6 w-full rounded-full border border-pink-300 text-pink-700 py-2.5 text-sm hover:bg-pink-100 transition-colors"
+        >
+          Tutup ✕
+        </button>
+      </div>
+
+      <style>{`
+        @keyframes popIn {
+          from { opacity: 0; transform: scale(0.85) translateY(24px); }
+          to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+      `}</style>
+    </div>
+  );
 
   return (
     <section className="w-full py-16 px-4 sm:px-10 bg-white">
@@ -25,85 +97,7 @@ export default function SectionKeenam() {
         </button>
       </div>
 
-      {/* OVERLAY */}
-      {opened && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center px-4"
-          style={{ backgroundColor: "rgba(50, 5, 20, 0.65)" }}
-          onClick={() => setOpened(false)}
-        >
-          {/* MODAL CARD */}
-          <div
-            className="relative bg-pink-50 border border-pink-200 rounded-3xl p-8 sm:p-10 max-w-lg w-full text-center shadow-2xl max-h-[90vh] overflow-y-auto"
-            style={{
-              animation: "popIn 0.45s cubic-bezier(0.34,1.56,0.64,1) both",
-            }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Tombol close */}
-            <button
-              onClick={() => setOpened(false)}
-              className="absolute top-4 right-5 text-pink-400 hover:text-pink-700 text-xl transition-colors"
-            >
-              ✕
-            </button>
-
-            {/* Ikon */}
-            <div className="text-4xl mb-3">💌</div>
-
-            <p className="font-serif text-lg font-semibold text-pink-900 mb-4">
-              Untuk Ameisha Nadilah Sayangkuu
-            </p>
-
-            {/* Garis pembatas */}
-            <div className="h-px bg-gradient-to-r from-transparent via-pink-300 to-transparent mb-5" />
-
-            <div className="space-y-3 text-left">
-              <p className="text-sm sm:text-base text-pink-900 leading-relaxed">
-                Terima kasih sudah jadi kamu selama ini, dengan semua versi kamu
-                yang lagi seneng, lagi sedih, lagi cape, lagi heboh semuanya.
-              </p>
-              <p className="text-sm sm:text-base text-pink-900 leading-relaxed">
-                Di umur 21 ini, aku cuma pengin kamu tahu kalau ada seseorang di
-                sini yang bener-bener sayang sama kamu dan bangga sama kamu.
-              </p>
-              <p className="text-sm sm:text-base text-pink-900 leading-relaxed">
-                Makasih udah ada, makasih udah mau dikenal, makasih udah jadi kamu
-                yang aku kenal dan sayangin. Kamu layak bahagia, bukan cuma hari
-                ini tapi setiap harinya.
-              </p>
-            </div>
-
-            <div className="h-px bg-gradient-to-r from-transparent via-pink-300 to-transparent my-5" />
-
-            <p className="font-serif text-sm sm:text-base text-pink-700 text-right">
-              Selamat ulang tahun yang ke-21, Sayang.<br />
-              Semoga tahun ini lebih lembut buat kamu. ♡
-            </p>
-
-            <button
-              onClick={() => setOpened(false)}
-              className="mt-6 w-full rounded-full border border-pink-300 text-pink-700 py-2.5 text-sm hover:bg-pink-100 transition-colors"
-            >
-              Tutup ✕
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* Animasi pop-in */}
-      <style jsx>{`
-        @keyframes popIn {
-          from {
-            opacity: 0;
-            transform: scale(0.85) translateY(24px);
-          }
-          to {
-            opacity: 1;
-            transform: scale(1) translateY(0);
-          }
-        }
-      `}</style>
+      {mounted && opened && createPortal(modal, document.body)}
     </section>
   );
 }
