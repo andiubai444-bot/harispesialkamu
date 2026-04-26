@@ -6,7 +6,6 @@ import SectionKelima from "../components/SectionKelima/SectionKelima";
 import SectionKeenam from "../components/SectionKeenam/SectionKeenam";
 import SectionKetujuh from "../components/SectionKetujuh/SectionKetujuh";
 import SectionKedelapan from "../components/SectionKedelapan/SectionKedelapan";
-import SpotifySection from "../components/SpotifySection";
 import MusicPlayer from "../components/MusicPlayer";
 import Confetti from "../components/Confetti";
 import CounterBersama from "../components/CounterBersama";
