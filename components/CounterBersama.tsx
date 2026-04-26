@@ -41,7 +41,7 @@ export default function CounterBersama() {
 
         {/* Counter */}
         <p className="text-xs tracking-widest text-pink-600 uppercase mb-2">
-          ✦ sudah bersama ✦
+          ✦ Since We Said Yes ✦
         </p>
         <p className="font-serif text-xl text-pink-900 mb-8">
           Andi &amp; Ameisha
