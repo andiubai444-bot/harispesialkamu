@@ -17,12 +17,13 @@ export default function QuoteTransisi({ quote, author }: { quote: string; author
   return (
     <div
       ref={ref}
-      className={`w-full py-10 px-6 flex flex-col items-center justify-center text-center transition-all duration-1000 ease-out ${
+      style={{ transitionDelay: `0ms` }}
+      className={`w-full overflow-hidden px-6 sm:px-10 py-10 flex flex-col items-center justify-center text-center transition-all duration-1000 ease-out ${
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
       }`}
     >
       <div className="h-px w-16 bg-gradient-to-r from-transparent via-pink-300 to-transparent mb-6" />
-      <p className="font-serif text-lg sm:text-xl text-pink-800 italic max-w-md leading-relaxed">
+      <p className="font-serif text-base sm:text-lg text-pink-800 italic max-w-sm w-full leading-relaxed break-words">
         "{quote}"
       </p>
       {author && (
