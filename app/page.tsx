@@ -13,6 +13,7 @@ import Particles from "../components/Particles";
 import IntroScreen from "../components/IntroScreen";
 import PelukanVirtual from "../components/PelukanVirtual";
 import QuoteTransisi from "../components/QuoteTransisi";
+import FadeInSection from "../components/FadeInSection";
 
 export default function Home() {
   return (
@@ -20,34 +21,35 @@ export default function Home() {
       <IntroScreen />
       <main className="mx-auto flex min-h-screen w-full max-w-6xl flex-col">
         <Particles />
-        <HeroSection />
+
+        <FadeInSection><HeroSection /></FadeInSection>
 
         <QuoteTransisi quote="Kamu bukan cuma ulang tahun. Kamu tumbuh, dan aku beruntung bisa nonton prosesnya dari dekat." />
-        <SectionKedua />
+        <FadeInSection><SectionKedua /></FadeInSection>
 
         <QuoteTransisi quote="Ada hal-hal kecil dari kamu yang tanpa sadar bikin hariku lebih berwarna." />
-        <SectionKetiga />
+        <FadeInSection><SectionKetiga /></FadeInSection>
 
         <QuoteTransisi quote="Setiap foto adalah bukti kalau kita punya cerita yang layak dikenang." />
-        <SectionKeempat />
+        <FadeInSection><SectionKeempat /></FadeInSection>
 
         <QuoteTransisi quote="Detik demi detik, aku bersyukur bisa ngitung semuanya bareng kamu." />
-        <CounterBersama />
+        <FadeInSection><CounterBersama /></FadeInSection>
 
         <QuoteTransisi quote="Jarak itu nyata, tapi rasa ini lebih nyata." />
-        <SectionKelima />
+        <FadeInSection><SectionKelima /></FadeInSection>
 
         <QuoteTransisi quote="Janji bukan cuma kata-kata, tapi pilihan yang aku perbarui tiap hari." />
-        <SectionKeenam />
+        <FadeInSection><SectionKeenam /></FadeInSection>
 
         <QuoteTransisi quote="Kalau kamu udah baca sampai sini, berarti kamu tahu betapa seriusnya ini." />
-        <SectionKedelapan />
+        <FadeInSection><SectionKedelapan /></FadeInSection>
 
         <QuoteTransisi quote="Beberapa lagu itu bukan cuma musik, tapi pengingat tentang kamu." />
-        <PelukanVirtual />
+        <FadeInSection><PelukanVirtual /></FadeInSection>
 
         <QuoteTransisi quote="Sampai tahun depan, dan tahun-tahun berikutnya. Selalu." />
-        <SectionKetujuh />
+        <FadeInSection><SectionKetujuh /></FadeInSection>
 
         <MusicPlayer />
         <Confetti />
