@@ -33,6 +33,9 @@ export default function Home() {
         <QuoteTransisi quote="Setiap foto adalah bukti kalau kita punya cerita yang layak dikenang." />
         <FadeInSection><SectionKeempat /></FadeInSection>
 
+        <QuoteTransisi quote="Beberapa lagu itu bukan cuma musik, tapi pengingat tentang kamu." />
+        <FadeInSection><SectionKedelapan /></FadeInSection>
+
         <QuoteTransisi quote="Detik demi detik, aku bersyukur bisa ngitung semuanya bareng kamu." />
         <FadeInSection><CounterBersama /></FadeInSection>
 
@@ -43,9 +46,6 @@ export default function Home() {
         <FadeInSection><SectionKeenam /></FadeInSection>
 
         <QuoteTransisi quote="Kalau kamu udah baca sampai sini, berarti kamu tahu betapa seriusnya ini." />
-        <FadeInSection><SectionKedelapan /></FadeInSection>
-
-        <QuoteTransisi quote="Beberapa lagu itu bukan cuma musik, tapi pengingat tentang kamu." />
         <FadeInSection><PelukanVirtual /></FadeInSection>
 
         <QuoteTransisi quote="Sampai tahun depan, dan tahun-tahun berikutnya. Selalu." />
