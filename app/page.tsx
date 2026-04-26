@@ -14,6 +14,7 @@ import IntroScreen from "../components/IntroScreen";
 import PelukanVirtual from "../components/PelukanVirtual";
 import QuoteTransisi from "../components/QuoteTransisi";
 import FadeInSection from "../components/FadeInSection";
+import CountdownUltah from "../components/CountdownUltah";
 
 export default function Home() {
   return (
@@ -21,7 +22,6 @@ export default function Home() {
       <IntroScreen />
       <main className="mx-auto flex min-h-screen w-full max-w-6xl flex-col">
         <Particles />
-
         <FadeInSection><HeroSection /></FadeInSection>
 
         <QuoteTransisi quote="Kamu bukan cuma ulang tahun. Kamu tumbuh, dan aku beruntung bisa nonton prosesnya dari dekat." />
@@ -50,6 +50,9 @@ export default function Home() {
 
         <QuoteTransisi quote="Sampai tahun depan, dan tahun-tahun berikutnya. Selalu." />
         <FadeInSection><SectionKetujuh /></FadeInSection>
+
+        <QuoteTransisi quote="Tahun depan, kita rayain lagi ya. Bareng." />
+        <FadeInSection><CountdownUltah /></FadeInSection>
 
         <MusicPlayer />
         <Confetti />
