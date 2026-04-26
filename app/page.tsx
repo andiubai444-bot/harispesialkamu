@@ -43,6 +43,7 @@ export default function Home() {
         <QuoteTransisi quote="Kalau kamu udah baca sampai sini, berarti kamu tahu betapa seriusnya ini." />
         <SectionKedelapan />
 
+        <QuoteTransisi quote="Beberapa lagu itu bukan cuma musik, tapi pengingat tentang kamu." />
         <PelukanVirtual />
 
         <QuoteTransisi quote="Sampai tahun depan, dan tahun-tahun berikutnya. Selalu." />
