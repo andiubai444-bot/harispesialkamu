@@ -34,7 +34,7 @@ export default function SectionKeenam() {
         >
           {/* MODAL CARD */}
           <div
-            className="relative bg-pink-50 border border-pink-200 rounded-3xl p-8 sm:p-10 max-w-lg w-full text-center shadow-2xl"
+            className="relative bg-pink-50 border border-pink-200 rounded-3xl p-8 sm:p-10 max-w-lg w-full text-center shadow-2xl max-h-[90vh] overflow-y-auto"
             style={{
               animation: "popIn 0.45s cubic-bezier(0.34,1.56,0.64,1) both",
             }}
