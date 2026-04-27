@@ -1,17 +1,18 @@
 "use client";
 import { useState, useCallback } from "react";
 
-type Heart = {
+type Particle = {
   id: number;
-  x: number;
-  y: number;
   dx: number;
   dy: number;
   size: number;
   color: string;
+  isLily: boolean;
+  emoji?: string;
 };
 
 const COLORS = ["#f9a8d4", "#fda4af", "#fbcfe8", "#ff85a1", "#fcd5e3", "#fde68a"];
+const LILY_EMOJIS = ["🌸", "🌷"];
 
 const REACTIONS = [
   { min: 1, max: 1, text: "Satu pelukan buat kamu ♡" },
@@ -35,7 +36,7 @@ function getReaction(count: number) {
 }
 
 export default function PelukanVirtual() {
-  const [hearts, setHearts] = useState<Heart[]>([]);
+  const [particles, setParticles] = useState<Particle[]>([]);
   const [clicked, setClicked] = useState(false);
   const [counter, setCounter] = useState(0);
 
@@ -44,25 +45,24 @@ export default function PelukanVirtual() {
     setCounter((c) => c + 1);
     setTimeout(() => setClicked(false), 300);
 
-    const newHearts: Heart[] = Array.from({ length: 12 }, (_, i) => {
-      const angle = (i / 12) * Math.PI * 2;
+    const newParticles: Particle[] = Array.from({ length: 14 }, (_, i) => {
+      const angle = (i / 14) * Math.PI * 2;
       const dist = Math.random() * 60 + 60;
+      const isLily = i % 4 === 0; // setiap 4 partikel, 1 adalah lily
       return {
         id: Date.now() + i,
-        x: 0,
-        y: 0,
         dx: Math.cos(angle) * dist,
         dy: Math.sin(angle) * dist,
         size: Math.random() * 14 + 12,
         color: COLORS[Math.floor(Math.random() * COLORS.length)],
+        isLily,
+        emoji: isLily ? LILY_EMOJIS[Math.floor(Math.random() * LILY_EMOJIS.length)] : undefined,
       };
     });
 
-    setHearts((prev) => [...prev, ...newHearts]);
+    setParticles((prev) => [...prev, ...newParticles]);
     setTimeout(() => {
-      setHearts((prev) =>
-        prev.filter((h) => !newHearts.find((n) => n.id === h.id))
-      );
+      setParticles((prev) => prev.filter((p) => !newParticles.find((n) => n.id === p.id)));
     }, 1800);
   }, []);
 
@@ -72,55 +72,51 @@ export default function PelukanVirtual() {
         <p className="text-xs tracking-widest text-pink-600 uppercase mb-2">
           ✦ untuk kamu ✦
         </p>
-        <p className="font-serif text-xl text-pink-900 mb-2">
-          Pelukan Virtual
-        </p>
+        <p className="font-serif text-xl text-pink-900 mb-2">Pelukan Virtual</p>
         <p className="text-sm text-pink-500 mb-8">
           Karena aku ga bisa peluk kamu langsung, ini buat gantinya 🤗
         </p>
 
         <div className="flex justify-center items-center mb-6">
           <div className="relative flex justify-center items-center w-48 h-48">
-            {hearts.map((heart) => (
+
+            {particles.map((p) => (
               <div
-                key={heart.id}
+                key={`final-${p.id}`}
                 style={{
                   position: "absolute",
-                  top: "50%",
-                  left: "50%",
-                  fontSize: heart.size,
-                  color: heart.color,
+                  top: "50%", left: "50%",
+                  fontSize: p.isLily ? p.size + 8 : p.size,
+                  color: p.color,
                   pointerEvents: "none",
-                  animation: "none",
                   transition: "transform 1.6s ease-out, opacity 1.6s ease-out",
-                  transform: `translate(${heart.dx}px, ${heart.dy}px)`,
+                  transform: `translate(${p.dx}px, ${p.dy}px)`,
                   opacity: 0,
-                  marginTop: -heart.size / 2,
-                  marginLeft: -heart.size / 2,
+                  marginTop: -p.size / 2,
+                  marginLeft: -p.size / 2,
                 }}
               >
-                ♥
+                {p.isLily ? p.emoji : "♥"}
               </div>
             ))}
 
-            {hearts.map((heart) => (
+            {particles.map((p) => (
               <div
-                key={`init-${heart.id}`}
+                key={`init-${p.id}`}
                 style={{
                   position: "absolute",
-                  top: "50%",
-                  left: "50%",
-                  fontSize: heart.size,
-                  color: heart.color,
+                  top: "50%", left: "50%",
+                  fontSize: p.isLily ? p.size + 8 : p.size,
+                  color: p.color,
                   pointerEvents: "none",
                   animation: `flyOut 1.6s ease-out forwards`,
-                  marginTop: -heart.size / 2,
-                  marginLeft: -heart.size / 2,
-                  ["--dx" as string]: `${heart.dx}px`,
-                  ["--dy" as string]: `${heart.dy}px`,
+                  marginTop: -p.size / 2,
+                  marginLeft: -p.size / 2,
+                  ["--dx" as string]: `${p.dx}px`,
+                  ["--dy" as string]: `${p.dy}px`,
                 }}
               >
-                ♥
+                {p.isLily ? p.emoji : "♥"}
               </div>
             ))}
 
@@ -158,19 +154,11 @@ export default function PelukanVirtual() {
 
       <style jsx>{`
         @keyframes flyOut {
-          0% {
-            transform: translate(0, 0) scale(1);
-            opacity: 1;
-          }
-          80% {
-            opacity: 0.8;
-          }
-          100% {
-            transform: translate(var(--dx), var(--dy)) scale(0.3);
-            opacity: 0;
-          }
+          0% { transform: translate(0, 0) scale(1); opacity: 1; }
+          80% { opacity: 0.8; }
+          100% { transform: translate(var(--dx), var(--dy)) scale(0.3); opacity: 0; }
         }
       `}</style>
     </section>
   );
-                              }
+}
