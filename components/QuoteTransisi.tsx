@@ -17,8 +17,8 @@ export default function QuoteTransisi({ quote, author }: { quote: string; author
   return (
     <div
       ref={ref}
-      style={{ transitionDelay: `0ms` }}
-      className={`relative z-0 w-full overflow-hidden px-6 sm:px-10 py-10 flex flex-col items-center justify-center text-center transition-all duration-1000 ease-out ${
+      style={{ transitionDelay: `0ms`, zIndex: 0, position: "relative", isolation: "isolate" }}
+      className={`w-full overflow-hidden px-6 sm:px-10 py-10 flex flex-col items-center justify-center text-center transition-all duration-1000 ease-out ${
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
       }`}
     >
