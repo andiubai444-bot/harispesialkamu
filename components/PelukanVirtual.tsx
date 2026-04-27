@@ -13,6 +13,27 @@ type Heart = {
 
 const COLORS = ["#f9a8d4", "#fda4af", "#fbcfe8", "#ff85a1", "#fcd5e3", "#fde68a"];
 
+const REACTIONS = [
+  { min: 1, max: 1, text: "Satu pelukan buat kamu ♡" },
+  { min: 2, max: 4, text: "Hehe makasih balik ya 🥺" },
+  { min: 5, max: 7, text: "Kamu suka banget ya dipeluk 😄" },
+  { min: 8, max: 9, text: "Oke oke aku peluk terus deh ♡" },
+  { min: 10, max: 14, text: "Udah 10 pelukan, masih mau lagi? 🥹" },
+  { min: 15, max: 19, text: "Ya Allah kamu manja banget sih 😭♡" },
+  { min: 20, max: 24, text: "Aku juga pengen dipeluk balik lho 🤭" },
+  { min: 25, max: 29, text: "Nggak cape? Aku sih nggak 🤗" },
+  { min: 30, max: 49, text: "30 pelukan... kamu serius?? 😂♡" },
+  { min: 50, max: 99, text: "50 PELUKAN?? Aku ikutin terus kok! 💪♡" },
+  { min: 100, max: 199, text: "100 pelukan! Aku nggak akan berhenti selama kamu nggak berhenti 🔥♡" },
+  { min: 200, max: 499, text: "200?? Aku kuat kok, terus aja! Aku selalu ada 🤗♡" },
+  { min: 500, max: 999, text: "500 pelukan... aku bakal terus di sini sampai kapanpun 💕" },
+  { min: 1000, max: Infinity, text: "1000 pelukan dan aku masih di sini. Selalu. ♡" },
+];
+
+function getReaction(count: number) {
+  return REACTIONS.find((r) => count >= r.min && count <= r.max)?.text ?? "";
+}
+
 export default function PelukanVirtual() {
   const [hearts, setHearts] = useState<Heart[]>([]);
   const [clicked, setClicked] = useState(false);
@@ -58,11 +79,8 @@ export default function PelukanVirtual() {
           Karena aku ga bisa peluk kamu langsung, ini buat gantinya 🤗
         </p>
 
-        {/* Area hati terbang */}
         <div className="flex justify-center items-center mb-6">
           <div className="relative flex justify-center items-center w-48 h-48">
-
-            {/* Hati yang berterbangan */}
             {hearts.map((heart) => (
               <div
                 key={heart.id}
@@ -85,7 +103,6 @@ export default function PelukanVirtual() {
               </div>
             ))}
 
-            {/* Hati yang baru muncul (frame awal) */}
             {hearts.map((heart) => (
               <div
                 key={`init-${heart.id}`}
@@ -107,7 +124,6 @@ export default function PelukanVirtual() {
               </div>
             ))}
 
-            {/* Tombol utama */}
             <button
               onClick={sendHug}
               style={{
@@ -124,24 +140,18 @@ export default function PelukanVirtual() {
           </div>
         </div>
 
-        {/* Counter pelukan */}
         {counter > 0 && (
-          <div className="inline-flex items-center gap-2 bg-white border border-pink-200 rounded-full px-5 py-2 shadow-sm">
+          <div className="inline-flex items-center gap-2 bg-white border border-pink-200 rounded-full px-5 py-2 shadow-sm mb-3">
             <span className="text-pink-400 text-sm">🤗</span>
             <p className="text-sm text-pink-700 font-serif">
-              {counter === 1 ? "1 pelukan terkirim ♡" : `${counter} pelukan terkirim ♡`}
+              {counter} pelukan terkirim ♡
             </p>
           </div>
         )}
 
-        {counter >= 5 && (
-          <p className="text-xs text-pink-400 mt-3 italic">
-            Hehe kamu suka ya dipeluk 🥺
-          </p>
-        )}
-        {counter >= 10 && (
-          <p className="text-xs text-pink-400 mt-1 italic">
-            Oke oke aku peluk terus deh ♡
+        {counter > 0 && (
+          <p className="text-xs text-pink-400 italic transition-all duration-300">
+            {getReaction(counter)}
           </p>
         )}
       </div>
@@ -163,4 +173,4 @@ export default function PelukanVirtual() {
       `}</style>
     </section>
   );
-}
+                              }
