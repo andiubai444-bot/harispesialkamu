@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 type HeartBurst = {
   id: number;
@@ -37,17 +38,25 @@ export default function SectionKetujuh() {
   const [hearts, setHearts] = useState<HeartBurst[]>([]);
   const [isSlideshowOpen, setIsSlideshowOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => { setMounted(true); }, []);
 
   useEffect(() => {
-    if (!isSlideshowOpen) {
-      return;
-    }
-
+    if (!isSlideshowOpen) return;
     const intervalId = window.setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % memories.length);
     }, 2500);
-
     return () => window.clearInterval(intervalId);
+  }, [isSlideshowOpen]);
+
+  useEffect(() => {
+    if (isSlideshowOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
   }, [isSlideshowOpen]);
 
   const handleClaimHug = () => {
@@ -57,13 +66,10 @@ export default function SectionKetujuh() {
       size: Math.floor(Math.random() * 8) + 14,
       duration: 900 + Math.floor(Math.random() * 600),
     }));
-
     setHearts((prev) => [...prev, ...burst]);
-
     window.setTimeout(() => {
       setHearts((prev) => prev.filter((heart) => !burst.some((b) => b.id === heart.id)));
     }, 1800);
-
     setCurrentSlide(0);
     setIsSlideshowOpen(true);
   };
@@ -75,6 +81,61 @@ export default function SectionKetujuh() {
   const handleNextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % memories.length);
   };
+
+  const modal = (
+    <div
+      className="fixed inset-0 bg-pink-950/55 px-4 py-6 sm:p-8 flex items-center justify-center"
+      style={{ zIndex: 99999 }}
+      onClick={() => setIsSlideshowOpen(false)}
+    >
+      <div
+        className="w-full max-w-md rounded-3xl border border-pink-100 bg-white p-4 sm:p-5 shadow-xl shadow-pink-900/20"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-pink-100">
+          <Image
+            src={memories[currentSlide].imageSrc}
+            alt={memories[currentSlide].title}
+            fill
+            sizes="(max-width: 640px) 92vw, 420px"
+            className="object-cover"
+          />
+        </div>
+        <p className="mt-3 text-sm text-pink-500 font-medium">
+          {currentSlide + 1} / {memories.length}
+        </p>
+        <h3 className="text-lg font-semibold text-pink-900">
+          {memories[currentSlide].title}
+        </h3>
+        <p className="mt-1 text-sm text-pink-700">
+          {memories[currentSlide].caption}
+        </p>
+        <div className="mt-4 flex items-center justify-between gap-2">
+          <button
+            type="button"
+            onClick={handlePrevSlide}
+            className="rounded-full border border-pink-200 px-4 py-2 text-sm font-medium text-pink-700 hover:bg-pink-50 transition-colors"
+          >
+            Prev
+          </button>
+          <button
+            type="button"
+            onClick={() => setIsSlideshowOpen(false)}
+            className="rounded-full bg-pink-500 px-4 py-2 text-sm font-semibold text-white hover:bg-pink-600 transition-colors"
+          >
+            Close
+          </button>
+          <button
+            type="button"
+            onClick={handleNextSlide}
+            className="rounded-full border border-pink-200 px-4 py-2 text-sm font-medium text-pink-700 hover:bg-pink-50 transition-colors"
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <>
@@ -105,7 +166,6 @@ export default function SectionKetujuh() {
                 ❤
               </span>
             ))}
-
             <button
               onClick={handleClaimHug}
               type="button"
@@ -117,61 +177,7 @@ export default function SectionKetujuh() {
         </div>
       </section>
 
-      {isSlideshowOpen && (
-        <div
-          className="fixed inset-0 z-50 bg-pink-950/55 px-4 py-6 sm:p-8 flex items-center justify-center"
-          onClick={() => setIsSlideshowOpen(false)}
-        >
-          <div
-            className="w-full max-w-md rounded-3xl border border-pink-100 bg-white p-4 sm:p-5 shadow-xl shadow-pink-900/20"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-pink-100">
-              <Image
-                src={memories[currentSlide].imageSrc}
-                alt={memories[currentSlide].title}
-                fill
-                sizes="(max-width: 640px) 92vw, 420px"
-                className="object-cover"
-              />
-            </div>
-
-            <p className="mt-3 text-sm text-pink-500 font-medium">
-              {currentSlide + 1} / {memories.length}
-            </p>
-            <h3 className="text-lg font-semibold text-pink-900">
-              {memories[currentSlide].title}
-            </h3>
-            <p className="mt-1 text-sm text-pink-700">
-              {memories[currentSlide].caption}
-            </p>
-
-            <div className="mt-4 flex items-center justify-between gap-2">
-              <button
-                type="button"
-                onClick={handlePrevSlide}
-                className="rounded-full border border-pink-200 px-4 py-2 text-sm font-medium text-pink-700 hover:bg-pink-50 transition-colors"
-              >
-                Prev
-              </button>
-              <button
-                type="button"
-                onClick={() => setIsSlideshowOpen(false)}
-                className="rounded-full bg-pink-500 px-4 py-2 text-sm font-semibold text-white hover:bg-pink-600 transition-colors"
-              >
-                Close
-              </button>
-              <button
-                type="button"
-                onClick={handleNextSlide}
-                className="rounded-full border border-pink-200 px-4 py-2 text-sm font-medium text-pink-700 hover:bg-pink-50 transition-colors"
-              >
-                Next
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {mounted && isSlideshowOpen && createPortal(modal, document.body)}
     </>
   );
 }
