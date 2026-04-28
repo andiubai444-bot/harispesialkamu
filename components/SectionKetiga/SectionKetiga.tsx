@@ -1,8 +1,8 @@
 const thingsILove = [
-  "Caramu jadi versi kamu sendiri tanpa pura-pura di depan orang.",
-  "Cara kamu mikirin aku, bahkan di saat kamu lagi capek.",
-  "Reaksi kamu yang selalu ada ketika aku butuh.",
-  "Caramu ngehargain hal-hal kecil yang orang lain sering lewatin.",
+  "Aku suka bagaimana kamu selalu menjadi tempat paling tenang untukku pulang.",
+  "Caramu memeluk jarak antara Balikpapan dan Pontianak dengan sabar, meyakinkanku kalau hati kita gak bener bener jauh",
+  "Aku suka bagaimana senyummu selalu punya cara ajaib untuk membuat duniaku yang rumit terasa jauh lebih indah.",
+  "Caramu mendengarkan semua ceritaku dengan tulus, membuatku merasa menjadi orang paling beruntung didunia",
   "Fakta bahwa di umur 21 ini, kamu udah sejauh ini berjuang tapi tetap bisa senyum.",
   "Ini baru sebagian kecil dari hal-hal yang aku suka dari kamu, sayangg.",
 ];
