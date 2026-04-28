@@ -8,7 +8,7 @@ type Harapan = {
   created_at: string;
 };
 
-const PASSWORD = "ameisha2026"; // ganti sesuka hati
+const PASSWORD = "ameishacantik"; // ganti sesuka hati
 
 export default function HarapanAmeisha() {
   const [harapanList, setHarapanList] = useState<Harapan[]>([]);
