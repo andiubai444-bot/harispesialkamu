@@ -4,7 +4,7 @@ const thingsILove = [
   "Aku suka bagaimana senyummu selalu punya cara ajaib untuk membuat duniaku yang rumit terasa jauh lebih indah.",
   "Caramu mendengarkan semua ceritaku dengan tulus, membuatku merasa menjadi orang paling beruntung didunia",
   "Fakta bahwa di umur 21 ini, kamu udah sejauh ini berjuang tapi tetap bisa senyum.",
-  "Ini baru sebagian kecil dari hal-hal yang aku suka dari kamu, Wanitakuu tercantik terpinterrr terimuttt tersayangkuuu seduniaa.",
+  "Ini baru sebagian kecil dari hal-hal yang aku suka dari kamu, Wanitakuu tercantik terpinterrr terimuttt tersayangkuuu seduniaa Akhirat.",
 ];
 
 export default function SectionKetiga() {
