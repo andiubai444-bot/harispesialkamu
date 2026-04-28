@@ -30,8 +30,8 @@ export default function CountdownUltah() {
 
   useEffect(() => {
     setMounted(true);
-    setTime(getCountdown(TARGET_WITA));
-    const tick = setInterval(() => setTime(getCountdown(TARGET_WITA)), 1000);
+    setTime(getCountdown(TARGET_WIB));
+    const tick = setInterval(() => setTime(getCountdown(TARGET_WIB)), 1000);
     return () => clearInterval(tick);
   }, []);
 
