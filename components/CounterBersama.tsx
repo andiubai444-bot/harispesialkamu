@@ -11,7 +11,8 @@ export default function CounterBersama() {
   const [h, setH] = useState(0);
   const [m, setM] = useState(0);
   const [s, setS] = useState(0);
-  const [animated, setAnimated] = useState(false);
+  const [planeProgress, setPlaneProgress] = useState(0);
+  const [planeDirection, setPlaneDirection] = useState(1); // 1 = kiri ke kanan, -1 = kanan ke kiri
 
   useEffect(() => {
     const tick = () => {
@@ -26,14 +27,57 @@ export default function CounterBersama() {
     return () => clearInterval(id);
   }, []);
 
+  // Animasi pesawat bolak-balik
   useEffect(() => {
-    const t1 = setTimeout(() => setAnimated(false), 50);
-    const t2 = setTimeout(() => setAnimated(true), 200);
-    return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
+    let progress = 0;
+    let direction = 1;
+    let animId: number;
+
+    const animate = () => {
+      progress += direction * 0.004; // kecepatan pesawat
+
+      if (progress >= 1) {
+        progress = 1;
+        direction = -1;
+      } else if (progress <= 0) {
+        progress = 0;
+        direction = 1;
+      }
+
+      setPlaneProgress(progress);
+      setPlaneDirection(direction);
+      animId = requestAnimationFrame(animate);
     };
+
+    animId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animId);
   }, []);
+
+  // Hitung posisi & rotasi pesawat di sepanjang kurva Bezier
+  // Path: M 0,30 Q 100,5 200,30
+  const getPlaneTransform = (t: number, dir: number) => {
+    // Titik di kurva quadratic bezier: P = (1-t)²*P0 + 2(1-t)t*P1 + t²*P2
+    const P0 = { x: 0, y: 30 };
+    const P1 = { x: 100, y: 5 };
+    const P2 = { x: 200, y: 30 };
+
+    const x = (1 - t) ** 2 * P0.x + 2 * (1 - t) * t * P1.x + t ** 2 * P2.x;
+    const y = (1 - t) ** 2 * P0.y + 2 * (1 - t) * t * P1.y + t ** 2 * P2.y;
+
+    // Turunan untuk mendapat sudut tangent
+    const dx = 2 * (1 - t) * (P1.x - P0.x) + 2 * t * (P2.x - P1.x);
+    const dy = 2 * (1 - t) * (P1.y - P0.y) + 2 * t * (P2.y - P1.y);
+    let angle = Math.atan2(dy, dx) * (180 / Math.PI);
+
+    // Kalau balik arah, flip pesawat
+    if (dir === -1) {
+      angle += 180;
+    }
+
+    return { x, y, angle };
+  };
+
+  const { x: px, y: py, angle: pAngle } = getPlaneTransform(planeProgress, planeDirection);
 
   return (
     <section className="w-full py-14 px-4 sm:px-10 bg-white">
@@ -83,14 +127,14 @@ export default function CounterBersama() {
             <p className="text-xs text-pink-500 mt-0.5">Kamu di sini</p>
           </div>
 
-          {/* Garis putus-putus */}
+          {/* Garis & Pesawat */}
           <div className="flex-1 mx-3 flex flex-col items-center gap-2">
             <svg
               viewBox="0 0 200 50"
               className="w-full"
               style={{ overflow: "visible" }}
             >
-              {/* Garis statis dulu sebagai background */}
+              {/* Garis latar */}
               <path
                 d="M 0,30 Q 100,5 200,30"
                 fill="none"
@@ -98,40 +142,33 @@ export default function CounterBersama() {
                 strokeWidth="2"
                 strokeDasharray="6 5"
               />
-              {/* Garis animasi di atasnya */}
+              {/* Garis pink */}
               <path
                 d="M 0,30 Q 100,5 200,30"
                 fill="none"
                 stroke="#f9a8d4"
                 strokeWidth="2"
                 strokeDasharray="6 5"
-                strokeDashoffset={animated ? "0" : "220"}
-                style={{
-                  transition: "stroke-dashoffset 2s ease 0.2s",
-                }}
               />
+
+              {/* Pesawat bolak-balik */}
               <text
-                x="100"
-                y="8"
+                x={px}
+                y={py}
                 textAnchor="middle"
+                dominantBaseline="middle"
                 fontSize="14"
                 style={{
-                  opacity: animated ? 1 : 0,
-                  transition: "opacity 0.5s ease 1.8s",
+                  transform: `rotate(${pAngle}deg)`,
+                  transformOrigin: `${px}px ${py}px`,
+                  transition: "none",
                 }}
               >
                 ✈️
               </text>
             </svg>
 
-            <div
-              className="bg-pink-50 border border-pink-200 rounded-full px-3 py-1"
-              style={{
-                opacity: animated ? 1 : 0,
-                transform: animated ? "translateY(0)" : "translateY(8px)",
-                transition: "opacity 0.5s ease 2s, transform 0.5s ease 2s",
-              }}
-            >
+            <div className="bg-pink-50 border border-pink-200 rounded-full px-3 py-1">
               <p className="text-xs font-semibold text-pink-700">± 892 km</p>
             </div>
           </div>
@@ -144,20 +181,4 @@ export default function CounterBersama() {
             <p className="font-serif text-sm text-pink-900 font-semibold">Balikpapan</p>
             <p className="text-xs text-pink-500 mt-0.5">Aku di sini</p>
           </div>
-        </div>
-
-        {/* Kalimat bawah */}
-        <p
-          className="text-sm text-pink-500 mt-8 font-serif italic"
-          style={{
-            opacity: animated ? 1 : 0,
-            transition: "opacity 0.6s ease 2.2s",
-          }}
-        >
-          Sejauh apapun, hati kita tetap dekat ♡
-        </p>
-
-      </div>
-    </section>
-  );
-}
+        </di
