@@ -3,23 +3,23 @@ const playlist = [
     title: "Lagu 1",
     artist: "Prettiest Thing I've Ever Seen - Lany",
     reason:
-      "Lagu ini bakal kita isi sama lagu yang paling ngingetin aku ke kamu.",
+      "Lagu ini yang paling ngingetin aku ke kamu.",
   },
   {
     title: "Lagu 2",
     artist: "Rayuan Perempuan Gila - Nadin Amizah",
     reason:
-      "Mungkin ini lagu yang sering kamu putar.",
+      "Ini Lagu Favorit Kamu Sayangg.",
   },
   {
     title: "Lagu 3",
     artist: "Lover - Taylor Swift",
-    reason: "Lagu yang liriknya berasa kayak lagi cerita tentang kita.",
+    reason: "Ini lagu nyeritain tentang kitaa.",
   },
   {
     title: "Lagu 4",
     artist: "Amin Paling Serius - Sal Priadi & Nadin Amizah",
-    reason: "Lagu yang maknanya menggambarkan hubungan kita kedepannya.",
+    reason: "Lagu yang maknanya menggambarkan hubungan kita kedepannyaaa.",
   },
 ];
 
