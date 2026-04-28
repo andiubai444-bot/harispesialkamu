@@ -42,11 +42,11 @@ export default function SectionKeenam() {
             yang lagi seneng, lagi sedih, lagi cape, lagi heboh semuanya.
           </p>
           <p className="text-sm sm:text-base text-pink-900 leading-relaxed">
-            Di umur 21 ini, aku cuma pengin kamu tahu kalau ada seseorang di
+            Di umur 21 ini, aku cuma pengen kamu tahu kalau ada seseorang di
             sini yang bener-bener sayang sama kamu dan bangga sama kamu.
           </p>
           <p className="text-sm sm:text-base text-pink-900 leading-relaxed">
-            Makasih udah ada, makasih udah mau dikenal, makasih udah jadi kamu
+            Makasih udah menerima aku, makasih udah mau berhubungan dengan aku, makasih udah jadi kamu
             yang aku kenal dan sayangin. Kamu layak bahagia, bukan cuma hari
             ini tapi setiap harinya.
           </p>
