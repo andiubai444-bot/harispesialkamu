@@ -91,7 +91,7 @@ export default function CountdownUltah() {
         </p>
 
         <p className="text-[11px] tracking-widest uppercase text-pink-300 mt-6">
-          waktu kamu · wita
+          waktu kamu · wib
         </p>
       </div>
     </section>
