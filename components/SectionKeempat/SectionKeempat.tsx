@@ -142,10 +142,10 @@ export default function SectionKeempat() {
     <section className="w-full py-16 px-4 sm:px-10 bg-white">
       <div className="max-w-5xl mx-auto">
         <h2 className="text-2xl sm:text-3xl font-bold text-pink-900 mb-6">
-          Potongan Kenangan Ulang Tahun
+          Our Little Archive of Joy
         </h2>
         <p className="text-pink-700 text-sm sm:text-base mb-6">
-          Di sini nanti bakal keisi foto-foto momen ulang tahunmu, atau momen random lain yang bikin kamu inget kalau kamu layak dirayakan, bukan cuma hari ini, tapi setiap hari.
+          Ruang ini aku siapkan untuk menyimpan semua binar matamu. May these random moments remind you that you are worth celebrating not just today, but every single day.
         </p>
 
         <div
