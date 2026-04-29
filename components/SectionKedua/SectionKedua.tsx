@@ -6,15 +6,16 @@ export default function SectionKedua() {
     >
       <div className="max-w-5xl mx-auto">
         <h2 className="text-2xl sm:text-3xl font-bold text-pink-900 mb-2">
-          21 Tahun Ameishakuu
+          Twenty One: Growing & Glowing
         </h2>
         <p className="text-pink-500 text-xs sm:text-sm font-medium mb-2">
-          Bab kecil tentang kamu dan usiamu yang baru ✨
+          Tentang kamuu, doa doaku, dan masa depan kamuu.
         </p>
         <p className="text-pink-700 text-sm sm:text-base mb-8 max-w-2xl">
-          Ulang tahun ke-21 kamu itu momen yang kerasa spesial banget buat aku.
-          Di sini aku kumpulin sedikit hal tentangmu dan tentang rasa syukurku
-          karena bisa nemenin kamu sejauh ini.
+          Twenty One Years of being wonderfull. Melihatmu sampai di titik ini
+          membuatku sadarr betapa hebatnyaa kamuu melewati prosesnyaa. Teruslah
+          tumbuh dengan caramuu sendiri yah sayangkuu. Keep shining, because the
+          World is a better place with you in it.
         </p>
         <div className="space-y-6">
           <div className="relative rounded-2xl border border-pink-100 bg-pink-50/80 p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_45px_rgba(244,114,182,0.35)] hover:border-pink-200">
@@ -40,17 +41,17 @@ export default function SectionKedua() {
               Untuk: Ameisha Nadilah
             </p>
             <p className="mt-3 text-sm sm:text-base text-pink-900">
-              Di usia baru ini, aku cuma pengen kamu lebih bahagia, lebih tenang
-              sama diri sendiri, dikelilingi orang-orang baik, dan selalu
-              ngerasa cukup, apapun yang lagi kamu jalanin. jangan merasa harus lari sendirian ya.
-              Pelan-pelan saja, nikmati prosesnya, dan ingat kalau aku selalu ada di baris paling depan buat dukung kamu.
+              Untukmuu sayangku, Di usia baruu ini, aku ingin kamuu lebih banyak tersenyum
+              untuk dirimu sendirii. May your heart be light, your soul be brave, and your
+              dreams find their way home. Aku akan selalu disinii, menjadi tempatmu pulang.
+              I’m always in your corner, today and always.
             </p>
           </div>
 
           <div className="rounded-2xl border border-dashed border-pink-200 bg-pink-50/40 p-5 sm:p-6 text-center transition-colors duration-300 hover:bg-pink-50/80">
             <p className="text-sm sm:text-base text-pink-700">
               Semoga di tiap halamannya, kamu selalu
-              nemuin alasan buat senyum.
+              nemuin alasan buat senyum yah sayang.
             </p>
           </div>
         </div>
