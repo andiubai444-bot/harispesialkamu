@@ -91,9 +91,9 @@ export default function HeroSection() {
           </h1>
 
           <p className="text-base sm:text-lg text-pink-700 mb-6 max-w-xl mx-auto sm:mx-0 animate-fade-in-up animate-delay-150">
-            Hari ini kamu resmi 21 tahun, dan aku pengin kasih sesuatu yang
-            kecil tapi tulus buat kamu. Scroll pelan-pelan ya, ini semua aku
-            bikin khusus buat kamu.
+            Selamat menempuh usia ke 21, Sayangkuu. Aku merakit baris baris kode ini satu
+            demi satu, untuk menunjukkan kalau kamu layak dirayakan dengan cara yang paling
+            istimewa. Lihat pelan pelan yahh sayanggg, semua ini hanya untukmu.
           </p>
           <button
             className="inline-flex items-center gap-2 rounded-full bg-pink-500 px-7 py-3.5 text-sm sm:text-base font-semibold text-white shadow-md shadow-pink-300/70 hover:bg-pink-600 hover:shadow-lg hover:shadow-pink-300/90 active:scale-95 transition duration-200 ease-out"
@@ -102,7 +102,7 @@ export default function HeroSection() {
               if (el) el.scrollIntoView({ behavior: "smooth" });
             }}
           >
-            Mulai lihat hadiah kecil ini
+            Masuk ke Dunia Ameisha ✨
             <span className="text-lg">♡</span>
           </button>
         </div>
