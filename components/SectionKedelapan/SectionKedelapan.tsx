@@ -3,23 +3,23 @@ const playlist = [
     title: "Lagu 1",
     artist: "Prettiest Thing I've Ever Seen - Lany",
     reason:
-      "Lagu ini yang paling ngingetin aku ke kamu.",
+      "Satu melodi yang selalu membawa pikiranku pulang ke kamu sayangg. Just like the lyrics say, you really are the prettiest thing I’ve ever seen.",
   },
   {
     title: "Lagu 2",
     artist: "Rayuan Perempuan Gila - Nadin Amizah",
     reason:
-      "Ini Lagu Favorit Kamu Sayangg.",
+      "Lagu yang paling identik dengan suaramu saat bersenandung. Seeing you love this song makes me love it even more. Terima kasih sudah berbagi duniamu denganku yah honeyy.",
   },
   {
     title: "Lagu 3",
     artist: "Lover - Taylor Swift",
-    reason: "Ini lagu nyeritain tentang kitaa.",
+    reason: "Satu melodi yang paling pas menggambarkan kita sayangg. In every lyric, I find a piece of our story. Terima kasih sudah menjadi sosok yang membuat lagu ini terasa begitu nyata dan penuh makna dalam hidupkuuu.",
   },
   {
     title: "Lagu 4",
     artist: "Amin Paling Serius - Sal Priadi & Nadin Amizah",
-    reason: "Lagu yang maknanya menggambarkan hubungan kita kedepannyaaa.",
+    reason: "Tuk selamanya... Amin paling serius seluruh dunia. Biar cinta kita paling kuat dan tetap mekar di antara doa-doa",
   },
 ];
 
