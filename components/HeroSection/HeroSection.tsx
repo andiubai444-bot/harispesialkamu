@@ -96,7 +96,7 @@ export default function HeroSection() {
             istimewa. Lihat pelan pelan yahh sayanggg, semua ini hanya untukmu.
           </p>
           <button
-            className="inline-flex items-center gap-2 rounded-full bg-pink-500 px-7 py-3.5 text-sm sm:text-base font-semibold text-white shadow-md shadow-pink-300/70 hover:bg-pink-600 hover:shadow-lg hover:shadow-pink-300/90 active:scale-95 transition duration-200 ease-out"
+            className="inline-flex items-center gap-2 rounded-2xl bg-pink-500 px-7 py-3.5 text-sm sm:text-base font-semibold text-white shadow-[0_0_15px_rgba(244,114,182,0.4)] hover:bg-pink-600 hover:shadow-[0_0_22px_rgba(244,114,182,0.65)] hover:scale-105 active:scale-95 transition-all duration-200 ease-out"
             onClick={() => {
               const el = document.getElementById("our-story");
               if (el) el.scrollIntoView({ behavior: "smooth" });
