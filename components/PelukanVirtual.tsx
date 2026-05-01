@@ -32,17 +32,19 @@ const REACTIONS = [
   { min: 1000, max: Infinity,  text: "1000 pelukan dan aku masih di sini. Selalu. ♡" },
 ];
 
-// Returns [currentMin, nextMin] for progress bar
+// Returns progress info for the bar
 function getReactionBounds(count: number) {
+  if (count <= 0) return { text: "", progress: 0, hint: "" };
   const idx = REACTIONS.findIndex((r) => count >= r.min && count <= r.max);
+  if (idx === -1) return { text: REACTIONS[REACTIONS.length - 1].text, progress: 1, hint: "" };
   const current = REACTIONS[idx];
   const next = REACTIONS[idx + 1];
-  if (!next) return { text: current?.text ?? "", progress: 1, hint: "" };
+  if (!next) return { text: current.text, progress: 1, hint: "" };
   const range = next.min - current.min;
   const progress = (count - current.min) / range;
   const remaining = next.min - count;
   return {
-    text: current?.text ?? "",
+    text: current.text,
     progress: Math.min(progress, 1),
     hint: remaining <= 5 ? `${remaining} lagi menuju kejutan berikutnya ✨` : "",
   };
