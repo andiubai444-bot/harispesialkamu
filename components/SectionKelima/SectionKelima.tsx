@@ -1,9 +1,9 @@
 const promises = [
-  "Aku janji bakal terus dukung kamu ngejar hal-hal yang kamu mau di usia 21 ini dan seterusnya.",
-  "Aku janji bakal jadi orang yang selalu kamu bisa ajak cerita, bahkan buat hal-hal kecil yang kelihatannya sepele.",
-  "Aku janji bakal terus ngingetin kamu kalau kamu cukup, bahkan di hari-hari kamu ngerasa nggak sehebat itu.",
-  "Aku janji bakal nyemangatin kamu waktu capek, dan nemenin kamu waktu kamu lagi ngerasa sendiri.",
-  "Aku janji di tahun berikutnya kita ngerayain hari ulang tahun kamu sama aku lagi.",
+  "Aku janji bakal tetap di sini jadi orang pertama yang dengerin semua keluh kesahmu, bahkan saat kamu cuma pengen marah-marah ke dunia tanpa alasan yang jelas.",
+  "Aku janji sejauh apa pun jarak Balikpapan ke Pontianak, aku nggak akan pernah bosen buat cari cara supaya kamu selalu ngerasa kalau aku ada tepat di sebelahmu sayang.",
+  "Aku janji bakal terus mengusahakan 'kita' supaya 'Amin' yang paling serius itu beneran kejadian, dan tahun-tahun depan kita masih ngerayain ulang tahun kamu sambil ketawa bareng lagi.",
+  "Aku janji bakal jadi tempat paling aman buat kamu jadi diri sendiri. Kamu nggak perlu pura-pura kuat di depanku Okeyy. kalau capek, bilang ya? Kita istirahat bareng-bareng.",
+  "Aku janji bakal terus semangatin kamu, termasuk waktu kamu lagi pusing sama judul skripsi atau tugas-tugas kuliahmu nanti. Aku bakal ada di barisan paling depan buat bangga sama kamu.",
 ];
 
 export default function SectionKelima() {
