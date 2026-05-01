@@ -6,22 +6,22 @@ import { createPortal } from "react-dom";
 const memories = [
   {
     title: "Foto 1",
-    caption: "Foto pertama yang ngebuat aku kecantol sama kamu.",
+    caption: "The very first page of us. Foto yang jadi alasan kenapa aku jatuh hati begitu dalam. Since that day, I knew you were the most beautiful view I've ever seen.",
     imageSrc: "/Foto2.jpg",
   },
   {
     title: "Foto 2",
-    caption: "Ini Foto yang palingg aku ingattt.",
+    caption: "Satu potret yang paling sering aku putar ulang di kepala. Of all the memories we’ve shared, this one stays with me the most.",
     imageSrc: "/Foto3.jpg",
   },
   {
     title: "Foto 3",
-    caption: "Momen Idul Fitri.",
+    caption: "Di hari yang fitri, aku menemukan kemenangan kecilku pada hadirmu. A day of celebration made even more beautiful because you were part of it. Terima kasih sudah melengkapi hari raya dan hari-hariku yang lainnya.",
     imageSrc: "/Foto4.jpg",
   },
   {
     title: "Foto 4",
-    caption: "Ini foto yang menurut aku kamu cantik banget banget banget",
+    caption: "Definisi cantik yang tidak pernah bosan aku pandangi. Di mataku, kamu selalu punya cara untuk tetap bersinar.",
     imageSrc: "/Foto5.jpg",
   },
 ];
