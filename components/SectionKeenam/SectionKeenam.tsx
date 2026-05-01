@@ -144,9 +144,13 @@ function HandwrittenSignature({ animate }: { animate: boolean }) {
 
 /* ─── Letter Lines with Typewriter ───────────────────────────────────────── */
 const LINES = [
-  "Terima kasih sudah jadi kamu selama ini, dengan semua versi kamu yang lagi seneng, lagi sedih, lagi cape, lagi heboh — semuanya.",
-  "Di umur 21 ini, aku cuma pengen kamu tahu kalau ada seseorang di sini yang bener-bener sayang sama kamu dan bangga sama kamu.",
-  "Makasih udah menerima aku, makasih udah mau berhubungan sama aku, makasih udah jadi kamu yang aku kenal dan sayangin. Kamu layak bahagia, bukan cuma hari ini tapi setiap harinya.",
+  "Haii Sayangkuu Ameishaa",
+  "Kalau sayangg sudah sampai di bagian ini, berarti cintakuu sudah melihat semua hal hal manis yang aku susun di website ini hehehe. Jujur, aku sempat bingung mau nulis apa, karena rasanya nggak ada satu pun baris kode atau rangkaian kata yang bener-bener bisa mewakili gimana berartinya kamu buat aku.",
+  "Makasih ya, Ameishakuu. Makasih sudah bertahan sama aku dari awal tahun kemarin. Makasih sudah mau melewati jarak yang kadang bikin rindu ini kerasa berat banget. Aku tahu hubungan kitaa itu nggak gampang, tapi setiap kali aku ingat kalau di sana ada kamu yang lagi berjuang juga.",
+  "Di usiamu yang ke-21 ini, aku nggak pengen janjiin hal yang muluk muluk. Aku cuma mau janji satu hal aku bakal tetap di sini. Aku bakal jadi orang yang paling bangga bangett sama setiap pencapaian kecilmu, jadi orang yang bakal dengerin semua keluh kesahmu soal skripsi atau tugas kuliah, dan jadi tempat paling aman buat kamu pulang kalau dunia lagi berisik banget.",
+  "Aku sayang banget sama kamuuu, dengan semua versi kamu. Yang lagi seneng, yang lagi capek, yang lagi manja minta peluk, sampai yang lagi heboh. Kamu itu lebih dari sekadar pacar buat aku cantiikk. kamu itu partner, sahabat, dan 'Amin' paling serius yang selalu aku sebut dalam doa",
+  "Selamat ulang tahun yang ke-21, Ameishaa Sayangkuu. Semoga tahun ini lebih lembut buat kamu, semoga langkahmu selalu diringankan, dan semoga kita bisa terus bareng-bareng buat ngerayain ulang tahun tahun berikutnya.",
+  "I love you, now and always",
 ];
 
 function LetterLine({ text, active, onDone, delay = 0 }: {
