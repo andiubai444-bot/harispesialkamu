@@ -303,7 +303,7 @@ export default function SectionKeempat() {
           <p className="mt-3 text-pink-600 text-sm sm:text-base max-w-xl leading-relaxed">
             Ruang ini aku siapkan untuk menyimpan semua binar matamu.{" "}
             <em className="text-rose-300 not-italic" style={{ fontFamily: "Georgia, serif", fontStyle: "italic" }}>
-              May these moments remind you that you are worth celebrating — not just today, but every single day.
+              May these moments remind you that you are worth celebrating not just today, but every single day.
             </em>
           </p>
         </div>
