@@ -132,11 +132,11 @@ export default function HeroSection() {
             <div className="rounded-3xl bg-white/30 backdrop-blur-md border border-white/40 px-7 py-6 shadow-[0_8px_32px_rgba(244,114,182,0.15)]">
               <span className="text-5xl text-pink-300/70 font-serif leading-none select-none">"</span>
               <p className="text-base sm:text-lg text-pink-800/90 mt-1 leading-relaxed">
-                Aku merakit baris‑baris kode ini satu demi satu, untuk menunjukkan kalau kamu
-                layak dirayakan dengan cara yang paling istimewa.
+                Aku ngebuat inii dengan penuhh sukaa citaa, buatt nunjukkinn
+                kalauu kamuu begituu layak untuk dirayakan sayangg
                 <br />
-                <span className="text-pink-500 font-medium">Lihat pelan‑pelan yahh sayanggg</span>,
-                semua ini hanya untukmu. 🌸
+                <span className="text-pink-500 font-medium">Lihat pelan‑pelan yahh maniss</span>,
+                semua ini hanya untuk kamuu. 🌸
               </p>
               <span className="text-5xl text-pink-300/70 font-serif leading-none select-none float-right -mt-2">"</span>
             </div>
