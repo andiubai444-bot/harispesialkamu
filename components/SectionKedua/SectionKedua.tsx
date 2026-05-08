@@ -64,9 +64,9 @@ export default function SectionKedua() {
 
           {/* Body paragraph — sans-serif, airy */}
           <p className="mt-5 text-pink-700 text-sm sm:text-base max-w-2xl leading-relaxed">
-            Twenty One Years of being wonderful. Melihatmu sampai di titik ini
-            membuatku sadar betapa hebatnya kamu melewati prosesnya. Teruslah
-            tumbuh dengan caramu sendiri yah sayangku. Keep shining, because the
+            Twenty One Years of being wonderful. Melihatt kamuu udah sampaii dititik inii
+            membuatku sadar betapa hebatnya kamu melewati prosesnya yahh. Teruslah
+            tumbuh dengan caramu sendiri yah sayangkuuu. Keep shining, because the
             world is a better place with you in it.
           </p>
         </div>
