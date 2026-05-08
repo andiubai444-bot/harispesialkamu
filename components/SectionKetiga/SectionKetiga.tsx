@@ -7,7 +7,7 @@ const thingsILove = [
     size: "wide", // spans 2 cols on desktop
     rotate: "rotate-[-0.8deg]",
     icon: "🏡",
-    text: "Aku suka bagaimana kamu selalu menjadi tempat paling tenang untukku pulang.",
+    text: "Akuuu selalu nyaman samaa kamuu, hingga sekarangg kamu sudah kuanggap sebagai rumahh tempat amankuu.",
     sub: "Home is wherever you are.",
   },
   {
@@ -15,7 +15,7 @@ const thingsILove = [
     size: "tall", // taller card
     rotate: "rotate-[1.2deg]",
     icon: "✈️",
-    text: "Caramu memeluk jarak antara Balikpapan dan Pontianak dengan sabar, meyakinkanku kalau hati kita gak bener-bener jauh.",
+    text: "Kamu jugaa mauu untukk memulai hubungan jarak jauh inii, padahal kalau dipikir jarak kitaa gak dekatt tapi kamuu bisaa sayang sama akuu.",
     sub: "You taught me that distance is just a test to see how far love can travel.",
   },
   {
@@ -23,7 +23,7 @@ const thingsILove = [
     size: "normal",
     rotate: "rotate-[-1.4deg]",
     icon: "🌸",
-    text: "Aku suka bagaimana senyummu selalu punya cara ajaib untuk membuat duniaku yang rumit terasa jauh lebih indah.",
+    text: "Senyummuu, aku sangatt sukaa senyummuu. Senyummu itu bikinn hari harii ku terasaaa indahh sekaliii.",
     sub: "Your smile is my favorite piece of art.",
   },
   {
@@ -31,7 +31,7 @@ const thingsILove = [
     size: "normal",
     rotate: "rotate-[0.9deg]",
     icon: "🫶",
-    text: "Caramu mendengarkan semua ceritaku dengan tulus, membuatku merasa menjadi orang paling beruntung di dunia.",
+    text: "Caramu buat mendengarkann cerita ceritaa kuu dengan tulus, ngebuat aku merasaa menjadii orang yang palingg disayang diduniaa.",
     sub: "You listen like the world can wait.",
   },
   {
