@@ -416,6 +416,7 @@ function FlowerCanvas({ particles, onCoverDone, isExploding }: FlowerCanvasProps
       const W  = canvas!.width;
       const H  = canvas!.height;
 
+      if (!ctx) return;
       ctx.clearRect(0, 0, W, H);
 
       const ps = pRef.current;
