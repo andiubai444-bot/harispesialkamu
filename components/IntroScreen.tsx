@@ -729,6 +729,7 @@ function RevealScreen({ recipientName, particles, onAnimationComplete }: RevealS
     ro.observe(canvas);
 
     function loop(ts: number) {
+      if (!ctx) return; // ← PERBAIKAN: tambah null check di sini
       if (!lastTsRef.current) lastTsRef.current = ts;
       const dt = Math.min((ts - lastTsRef.current) / 1000, 0.05);
       lastTsRef.current = ts;
