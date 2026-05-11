@@ -3,24 +3,21 @@
 import { useEffect, useRef, useState, useCallback, type JSX } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-// ─── Types ────────────────────────────────────────────────────────────────────
-
 type Stage = "intro" | "exploding" | "fadeout";
 
 interface Particle {
   id:         number;
-  imgIndex:   number;   // which flower image to use
-  x:          number;   // % of canvas
+  imgIndex:   number;
+  x:          number;
   y:          number;
-  size:       number;   // px
-  rotation:   number;   // radians
+  size:       number;
+  rotation:   number;
   rotSpeed:   number;
   fallSpeed:  number;
   swayAmp:    number;
   swayFreq:   number;
   swayOffset: number;
   opacity:    number;
-  // explosion
   ox: number; oy: number;
   tx: number; ty: number;
   progress:   number;
@@ -28,7 +25,6 @@ interface Particle {
   delay:      number;
 }
 
-// Image sources — must be in /public/flowers/
 const FLOWER_SRCS = [
   "/flowers/LilyPink.png",
   "/flowers/LilyPutih.png",
@@ -37,7 +33,6 @@ const FLOWER_SRCS = [
   "/flowers/MawarMerah.png",
 ];
 
-// Weights: how often each flower appears (must sum to 1)
 const WEIGHTS = [0.22, 0.22, 0.20, 0.18, 0.18];
 
 function weightedRandom(): number {
@@ -54,9 +49,9 @@ let _id = 0;
 
 function makeParticle(phase: "burst" | "drift", cx = 50, cy = 50): Particle {
   const imgIndex = weightedRandom();
-  const isFlower = imgIndex < 2 || imgIndex === 4; // lily or rose = bigger
+  const isFlower = imgIndex < 2 || imgIndex === 4;
   const ang  = Math.random() * Math.PI * 2;
-  const dist = phase === "burst" ? 28 + Math.random() * 68 : Math.random() * 100;
+  const dist = phase === "burst" ? 28 + Math.random() * 72 : Math.random() * 105;
   const tx   = cx + Math.cos(ang) * dist;
   const ty   = cy + Math.sin(ang) * dist * 0.85;
 
@@ -65,37 +60,37 @@ function makeParticle(phase: "burst" | "drift", cx = 50, cy = 50): Particle {
     imgIndex,
     x:          phase === "burst" ? cx : tx,
     y:          phase === "burst" ? cy : ty,
+    // ← ukuran jauh lebih besar
     size:       isFlower
-                  ? 44 + Math.random() * 36
-                  : 18 + Math.random() * 18,
+                  ? 110 + Math.random() * 80   // bunga: 110–190px
+                  :  40 + Math.random() * 35,  // kelopak: 40–75px
     rotation:   Math.random() * Math.PI * 2,
-    rotSpeed:   (Math.random() - 0.5) * (isFlower ? 0.5 : 1.2),
-    fallSpeed:  isFlower ? 4 + Math.random() * 6 : 9 + Math.random() * 12,
-    swayAmp:    isFlower ? 0.5 + Math.random() * 1.4 : 1.4 + Math.random() * 2.4,
-    swayFreq:   0.18 + Math.random() * 0.36,
+    rotSpeed:   (Math.random() - 0.5) * (isFlower ? 0.4 : 0.9),
+    fallSpeed:  isFlower ? 3 + Math.random() * 5 : 7 + Math.random() * 9,
+    swayAmp:    isFlower ? 0.4 + Math.random() * 1.2 : 1.2 + Math.random() * 2.0,
+    swayFreq:   0.15 + Math.random() * 0.3,
     swayOffset: Math.random() * Math.PI * 2,
-    opacity:    0.72 + Math.random() * 0.28,
+    opacity:    0.80 + Math.random() * 0.20,
     ox: cx, oy: cy, tx, ty,
     progress:   phase === "burst" ? 0 : 1,
     launched:   phase !== "burst",
-    delay:      phase === "burst" ? Math.random() * 0.28 : 0,
+    delay:      phase === "burst" ? Math.random() * 0.25 : 0,
   };
 }
 
 // ─── Canvas ───────────────────────────────────────────────────────────────────
 
 function FlowerCanvas({ onEnoughParticles }: { onEnoughParticles: () => void }): JSX.Element {
-  const canvasRef  = useRef<HTMLCanvasElement>(null);
-  const psRef      = useRef<Particle[]>([]);
-  const imgsRef    = useRef<HTMLImageElement[]>([]);
-  const rafRef     = useRef<number>(0);
-  const tsRef      = useRef<number | null>(null);
-  const tRef       = useRef(0);
-  const firedRef   = useRef(false);
-  const readyRef   = useRef(false);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const psRef     = useRef<Particle[]>([]);
+  const imgsRef   = useRef<HTMLImageElement[]>([]);
+  const rafRef    = useRef<number>(0);
+  const tsRef     = useRef<number | null>(null);
+  const tRef      = useRef(0);
+  const firedRef  = useRef(false);
+  const readyRef  = useRef(false);
 
   useEffect(() => {
-    // Pre-load all flower images
     let loaded = 0;
     const imgs: HTMLImageElement[] = FLOWER_SRCS.map((src) => {
       const img = new window.Image();
@@ -105,11 +100,10 @@ function FlowerCanvas({ onEnoughParticles }: { onEnoughParticles: () => void }):
         if (loaded === FLOWER_SRCS.length) {
           imgsRef.current = imgs;
           readyRef.current = true;
-          // Spawn burst particles after images ready
-          psRef.current = Array.from({ length: 72 }, () => makeParticle("burst", 50, 50));
+          psRef.current = Array.from({ length: 55 }, () => makeParticle("burst", 50, 50));
         }
       };
-      img.onerror = () => { loaded++; }; // skip broken images
+      img.onerror = () => { loaded++; };
       return img;
     });
 
@@ -142,7 +136,7 @@ function FlowerCanvas({ onEnoughParticles }: { onEnoughParticles: () => void }):
         return;
       }
 
-      const ps  = psRef.current;
+      const ps   = psRef.current;
       const imgs = imgsRef.current;
       let visible = 0;
 
@@ -153,14 +147,14 @@ function FlowerCanvas({ onEnoughParticles }: { onEnoughParticles: () => void }):
         }
 
         if (p.progress < 1) {
-          p.progress = Math.min(1, p.progress + 1.7 * dt);
+          p.progress = Math.min(1, p.progress + 1.6 * dt);
           const e = 1 - Math.pow(1 - p.progress, 3);
           p.x = p.ox + (p.tx - p.ox) * e;
           p.y = p.oy + (p.ty - p.oy) * e;
         } else {
           p.x += Math.sin(t * p.swayFreq + p.swayOffset) * p.swayAmp * dt * 0.5;
           p.y += p.fallSpeed * dt;
-          if (p.y >= -5 && p.y <= 112) visible++;
+          if (p.y >= -10 && p.y <= 115) visible++;
         }
 
         p.rotation += p.rotSpeed * dt;
@@ -173,7 +167,6 @@ function FlowerCanvas({ onEnoughParticles }: { onEnoughParticles: () => void }):
 
         ctx.save();
         ctx.globalAlpha = p.opacity;
-        // 'screen' blend mode makes black background invisible
         ctx.globalCompositeOperation = "screen";
         ctx.translate(px, py);
         ctx.rotate(p.rotation);
@@ -181,14 +174,13 @@ function FlowerCanvas({ onEnoughParticles }: { onEnoughParticles: () => void }):
         ctx.restore();
       }
 
-      // Reset composite for clear
       ctx.globalCompositeOperation = "source-over";
 
-      // Replenish drifters
-      if (t > 0.5 && ps.length < 65 && Math.random() < 0.055)
+      // Replenish drifters — ukuran besar jadi cukup 48 total
+      if (t > 0.5 && ps.length < 48 && Math.random() < 0.055)
         ps.push(makeParticle("drift"));
 
-      if (!firedRef.current && visible >= 42) {
+      if (!firedRef.current && visible >= 30) {
         firedRef.current = true;
         onEnoughParticles();
       }
@@ -209,7 +201,7 @@ function FlowerCanvas({ onEnoughParticles }: { onEnoughParticles: () => void }):
   );
 }
 
-// ─── Gift Box SVG ─────────────────────────────────────────────────────────────
+// ─── Gift Box ─────────────────────────────────────────────────────────────────
 
 function GiftBox(): JSX.Element {
   return (
@@ -321,7 +313,7 @@ export default function IntroScreen({ onDone }: { onDone: () => void }): JSX.Ele
               whileTap={stage === "intro"   ? { scale: 0.93 } : undefined}
               onClick={handleClick}
               className="relative cursor-pointer"
-              style={{ width: "min(200px, 48vw)", height: "min(215px, 51vw)" }}
+              style={{ width: "min(220px, 54vw)", height: "min(236px, 58vw)" }}
             >
               <div aria-hidden
                 className="absolute inset-x-4 bottom-0 h-8 rounded-full opacity-40"
@@ -360,7 +352,7 @@ export default function IntroScreen({ onDone }: { onDone: () => void }): JSX.Ele
             </AnimatePresence>
           </div>
 
-          {/* Bottom decorative line */}
+          {/* Bottom line */}
           <motion.div
             initial={{ scaleX: 0, opacity: 0 }}
             animate={{ scaleX: 1, opacity: 1 }}
