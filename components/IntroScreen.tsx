@@ -8,9 +8,9 @@ type Stage = "intro" | "exploding" | "fadeout";
 interface Particle {
   id:         number;
   imgIndex:   number;
-  x:          number;
-  y:          number;
-  size:       number;
+  x:          number;   // % viewport width
+  y:          number;   // % viewport height
+  size:       number;   // px
   rotation:   number;
   rotSpeed:   number;
   fallSpeed:  number;
@@ -18,6 +18,7 @@ interface Particle {
   swayFreq:   number;
   swayOffset: number;
   opacity:    number;
+  // burst phase
   ox: number; oy: number;
   tx: number; ty: number;
   progress:   number;
@@ -33,7 +34,8 @@ const FLOWER_SRCS = [
   "/flowers/MawarMerah.png",
 ];
 
-const WEIGHTS = [0.22, 0.22, 0.20, 0.18, 0.18];
+// More flowers, fewer petals
+const WEIGHTS = [0.28, 0.24, 0.14, 0.12, 0.22];
 
 function weightedRandom(): number {
   const r = Math.random();
@@ -51,44 +53,69 @@ function makeParticle(phase: "burst" | "drift", cx = 50, cy = 50): Particle {
   const imgIndex = weightedRandom();
   const isFlower = imgIndex < 2 || imgIndex === 4;
   const ang  = Math.random() * Math.PI * 2;
-  const dist = phase === "burst" ? 28 + Math.random() * 72 : Math.random() * 105;
+  const dist = phase === "burst" ? 20 + Math.random() * 65 : Math.random() * 110;
   const tx   = cx + Math.cos(ang) * dist;
-  const ty   = cy + Math.sin(ang) * dist * 0.85;
+  const ty   = cy + Math.sin(ang) * dist * 0.8;
 
   return {
     id:         _id++,
     imgIndex,
-    x:          phase === "burst" ? cx : tx,
-    y:          phase === "burst" ? cy : ty,
-    // ← ukuran jauh lebih besar
+    x:          phase === "burst" ? cx : Math.random() * 110 - 5,
+    y:          phase === "burst" ? cy : -15 - Math.random() * 30, // spawn above screen
     size:       isFlower
-                  ? 110 + Math.random() * 80   // bunga: 110–190px
-                  :  40 + Math.random() * 35,  // kelopak: 40–75px
+                  ? 160 + Math.random() * 120  // flowers: 160–280px
+                  :  55 + Math.random() * 50,  // petals:  55–105px
     rotation:   Math.random() * Math.PI * 2,
-    rotSpeed:   (Math.random() - 0.5) * (isFlower ? 0.4 : 0.9),
-    fallSpeed:  isFlower ? 3 + Math.random() * 5 : 7 + Math.random() * 9,
-    swayAmp:    isFlower ? 0.4 + Math.random() * 1.2 : 1.2 + Math.random() * 2.0,
-    swayFreq:   0.15 + Math.random() * 0.3,
+    rotSpeed:   (Math.random() - 0.5) * (isFlower ? 0.3 : 0.7),
+    fallSpeed:  isFlower ? 5 + Math.random() * 6 : 9 + Math.random() * 10,
+    swayAmp:    isFlower ? 0.3 + Math.random() * 1.0 : 0.8 + Math.random() * 1.6,
+    swayFreq:   0.12 + Math.random() * 0.28,
     swayOffset: Math.random() * Math.PI * 2,
-    opacity:    0.80 + Math.random() * 0.20,
+    opacity:    0.88 + Math.random() * 0.12,
     ox: cx, oy: cy, tx, ty,
     progress:   phase === "burst" ? 0 : 1,
     launched:   phase !== "burst",
-    delay:      phase === "burst" ? Math.random() * 0.25 : 0,
+    delay:      phase === "burst" ? Math.random() * 0.22 : 0,
+  };
+}
+
+// Pre-spawn drift particles scattered across top of screen
+function makeDriftParticle(): Particle {
+  const imgIndex = weightedRandom();
+  const isFlower = imgIndex < 2 || imgIndex === 4;
+  return {
+    id:         _id++,
+    imgIndex,
+    x:          Math.random() * 110 - 5,
+    y:          -20 - Math.random() * 60,
+    size:       isFlower
+                  ? 160 + Math.random() * 120
+                  :  55 + Math.random() * 50,
+    rotation:   Math.random() * Math.PI * 2,
+    rotSpeed:   (Math.random() - 0.5) * (isFlower ? 0.3 : 0.7),
+    fallSpeed:  isFlower ? 5 + Math.random() * 6 : 9 + Math.random() * 10,
+    swayAmp:    isFlower ? 0.3 + Math.random() * 1.0 : 0.8 + Math.random() * 1.6,
+    swayFreq:   0.12 + Math.random() * 0.28,
+    swayOffset: Math.random() * Math.PI * 2,
+    opacity:    0.88 + Math.random() * 0.12,
+    ox: 50, oy: 50, tx: 50, ty: 50,
+    progress:   1,
+    launched:   true,
+    delay:      0,
   };
 }
 
 // ─── Canvas ───────────────────────────────────────────────────────────────────
 
-function FlowerCanvas({ onEnoughParticles }: { onEnoughParticles: () => void }): JSX.Element {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const psRef     = useRef<Particle[]>([]);
-  const imgsRef   = useRef<HTMLImageElement[]>([]);
-  const rafRef    = useRef<number>(0);
-  const tsRef     = useRef<number | null>(null);
-  const tRef      = useRef(0);
-  const firedRef  = useRef(false);
-  const readyRef  = useRef(false);
+function FlowerCanvas({ onScreenFilled }: { onScreenFilled: () => void }): JSX.Element {
+  const canvasRef  = useRef<HTMLCanvasElement>(null);
+  const psRef      = useRef<Particle[]>([]);
+  const imgsRef    = useRef<HTMLImageElement[]>([]);
+  const rafRef     = useRef<number>(0);
+  const tsRef      = useRef<number | null>(null);
+  const tRef       = useRef(0);
+  const firedRef   = useRef(false);
+  const readyRef   = useRef(false);
 
   useEffect(() => {
     let loaded = 0;
@@ -100,7 +127,10 @@ function FlowerCanvas({ onEnoughParticles }: { onEnoughParticles: () => void }):
         if (loaded === FLOWER_SRCS.length) {
           imgsRef.current = imgs;
           readyRef.current = true;
-          psRef.current = Array.from({ length: 55 }, () => makeParticle("burst", 50, 50));
+          // Initial burst from center + pre-scattered drifters
+          const burst  = Array.from({ length: 40 }, () => makeParticle("burst", 50, 50));
+          const drifts = Array.from({ length: 35 }, () => makeDriftParticle());
+          psRef.current = [...burst, ...drifts];
         }
       };
       img.onerror = () => { loaded++; };
@@ -138,7 +168,7 @@ function FlowerCanvas({ onEnoughParticles }: { onEnoughParticles: () => void }):
 
       const ps   = psRef.current;
       const imgs = imgsRef.current;
-      let visible = 0;
+      let onScreen = 0;
 
       for (const p of ps) {
         if (!p.launched) {
@@ -146,15 +176,25 @@ function FlowerCanvas({ onEnoughParticles }: { onEnoughParticles: () => void }):
           else continue;
         }
 
+        // Burst phase — fly outward
         if (p.progress < 1) {
-          p.progress = Math.min(1, p.progress + 1.6 * dt);
+          p.progress = Math.min(1, p.progress + 1.5 * dt);
           const e = 1 - Math.pow(1 - p.progress, 3);
           p.x = p.ox + (p.tx - p.ox) * e;
           p.y = p.oy + (p.ty - p.oy) * e;
         } else {
+          // Fall + sway
           p.x += Math.sin(t * p.swayFreq + p.swayOffset) * p.swayAmp * dt * 0.5;
           p.y += p.fallSpeed * dt;
-          if (p.y >= -10 && p.y <= 115) visible++;
+
+          // Recycle off-screen particles back to top
+          if (p.y > 115) {
+            p.y = -15 - Math.random() * 20;
+            p.x = Math.random() * 110 - 5;
+            p.rotation = Math.random() * Math.PI * 2;
+          }
+
+          if (p.y >= -10 && p.y <= 110) onScreen++;
         }
 
         p.rotation += p.rotSpeed * dt;
@@ -167,22 +207,21 @@ function FlowerCanvas({ onEnoughParticles }: { onEnoughParticles: () => void }):
 
         ctx.save();
         ctx.globalAlpha = p.opacity;
-        ctx.globalCompositeOperation = "screen";
+        ctx.globalCompositeOperation = "source-over";
         ctx.translate(px, py);
         ctx.rotate(p.rotation);
         ctx.drawImage(img, -p.size / 2, -p.size / 2, p.size, p.size);
         ctx.restore();
       }
 
-      ctx.globalCompositeOperation = "source-over";
+      // Keep spawning new drifters to fill screen densely
+      if (t > 0.3 && ps.length < 90 && Math.random() < 0.08)
+        ps.push(makeDriftParticle());
 
-      // Replenish drifters — ukuran besar jadi cukup 48 total
-      if (t > 0.5 && ps.length < 48 && Math.random() < 0.055)
-        ps.push(makeParticle("drift"));
-
-      if (!firedRef.current && visible >= 30) {
+      // Fire when enough flowers cover the screen
+      if (!firedRef.current && onScreen >= 55) {
         firedRef.current = true;
-        onEnoughParticles();
+        onScreenFilled();
       }
 
       rafRef.current = requestAnimationFrame(loop);
@@ -190,7 +229,7 @@ function FlowerCanvas({ onEnoughParticles }: { onEnoughParticles: () => void }):
 
     rafRef.current = requestAnimationFrame(loop);
     return () => { cancelAnimationFrame(rafRef.current); ro.disconnect(); };
-  }, [onEnoughParticles]);
+  }, [onScreenFilled]);
 
   return (
     <canvas
@@ -212,8 +251,8 @@ function GiftBox(): JSX.Element {
       <rect x="61" y="68" width="18" height="68" fill="url(#rV)" rx="2" />
       <rect x="10" y="56" width="120" height="10" fill="url(#rH)" rx="2" />
       <ellipse cx="50" cy="46" rx="20" ry="12" fill="url(#bow)" transform="rotate(-28 50 46)" stroke="#7a0018" strokeWidth="0.8" />
-      <ellipse cx="90" cy="46" rx="20" ry="12" fill="url(#bow)" transform="rotate(28 90 46)"  stroke="#7a0018" strokeWidth="0.8" />
-      <ellipse cx="70" cy="52" rx="11" ry="9"  fill="url(#knot)" stroke="#7a0018" strokeWidth="0.8" />
+      <ellipse cx="90" cy="46" rx="20" ry="12" fill="url(#bow)" transform="rotate(28 90 46)" stroke="#7a0018" strokeWidth="0.8" />
+      <ellipse cx="70" cy="52" rx="11" ry="9" fill="url(#knot)" stroke="#7a0018" strokeWidth="0.8" />
       <path d="M62 59 Q54 72 46 86" stroke="#b8102a" strokeWidth="5" strokeLinecap="round" fill="none" opacity="0.65" />
       <path d="M78 59 Q86 72 94 86" stroke="#b8102a" strokeWidth="5" strokeLinecap="round" fill="none" opacity="0.65" />
       {([[22,42],[118,56],[28,96],[114,90]] as [number,number][]).map(([x,y],i) => (
@@ -256,9 +295,9 @@ export default function IntroScreen({ onDone }: { onDone: () => void }): JSX.Ele
     setStage("exploding");
   }, [stage]);
 
-  const handleEnough = useCallback(() => {
-    setTimeout(() => setStage("fadeout"), 200);
-    setTimeout(() => onDone(), 900);
+  const handleScreenFilled = useCallback(() => {
+    setTimeout(() => setStage("fadeout"), 300);
+    setTimeout(() => onDone(), 1100);
   }, [onDone]);
 
   return (
@@ -269,7 +308,7 @@ export default function IntroScreen({ onDone }: { onDone: () => void }): JSX.Ele
           className="fixed inset-0 z-[99999] flex flex-col items-center justify-center overflow-hidden"
           style={{ background: "linear-gradient(135deg, #2a0008 0%, #3e000c 60%, #1a0004 100%)" }}
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0, transition: { duration: 0.8, ease: "easeInOut" } }}
+          exit={{ opacity: 0, transition: { duration: 0.9, ease: "easeInOut" } }}
         >
           {/* Ambient glows */}
           <div aria-hidden className="pointer-events-none absolute inset-0">
@@ -279,10 +318,10 @@ export default function IntroScreen({ onDone }: { onDone: () => void }): JSX.Ele
               style={{ background: "radial-gradient(ellipse, #cc0030 0%, transparent 70%)", filter: "blur(70px)" }} />
           </div>
 
-          {/* Flower canvas */}
+          {/* Flower canvas — fills screen when exploding */}
           {stage === "exploding" && (
             <div className="absolute inset-0">
-              <FlowerCanvas onEnoughParticles={handleEnough} />
+              <FlowerCanvas onScreenFilled={handleScreenFilled} />
             </div>
           )}
 
@@ -296,7 +335,7 @@ export default function IntroScreen({ onDone }: { onDone: () => void }): JSX.Ele
               className="text-[10px] sm:text-xs tracking-[0.45em] uppercase"
               style={{ color: "rgba(255,180,200,0.5)", fontFamily: "'Georgia', serif" }}
             >
-              untuk Ameisha Pacarku Yang Istimewa
+              untuk Ameisha Pacarku yang istimewa
             </motion.p>
 
             {/* Gift box */}
@@ -304,8 +343,8 @@ export default function IntroScreen({ onDone }: { onDone: () => void }): JSX.Ele
               initial={{ opacity: 0, scale: 0.5, y: 30 }}
               animate={
                 stage === "exploding"
-                  ? { scale: [1, 1.22, 0.85, 1.3, 0], opacity: [1,1,1,1,0], rotate: [0,-8,10,-5,0],
-                      transition: { duration: 0.55, ease: "easeInOut" } }
+                  ? { scale: [1, 1.25, 0.8, 1.35, 0], opacity: [1,1,1,1,0], rotate: [0,-10,12,-6,0],
+                      transition: { duration: 0.6, ease: "easeInOut" } }
                   : { opacity: 1, scale: 1, y: 0,
                       transition: { delay: 0.2, duration: 0.7, ease: [0.22,1,0.36,1] } }
               }
@@ -316,8 +355,8 @@ export default function IntroScreen({ onDone }: { onDone: () => void }): JSX.Ele
               style={{ width: "min(220px, 54vw)", height: "min(236px, 58vw)" }}
             >
               <div aria-hidden
-                className="absolute inset-x-4 bottom-0 h-8 rounded-full opacity-40"
-                style={{ background: "radial-gradient(ellipse, #ff2050 0%, transparent 70%)", filter: "blur(12px)" }}
+                className="absolute inset-x-4 bottom-0 h-10 rounded-full opacity-50"
+                style={{ background: "radial-gradient(ellipse, #ff2050 0%, transparent 70%)", filter: "blur(14px)" }}
               />
               <GiftBox />
             </motion.div>
