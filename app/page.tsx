@@ -27,14 +27,14 @@ export default function Home() {
   return (
     <div className="min-h-screen w-full bg-gradient-to-b from-pink-100 via-white to-pink-50 text-pink-900 font-sans">
 
-      {/* Intro overlay — hilang setelah diklik */}
+      {/* Intro overlay */}
       <AnimatePresence>
         {!introDone && (
           <IntroScreen onDone={() => setIntroDone(true)} />
         )}
       </AnimatePresence>
 
-      {/* Konten utama — muncul setelah intro selesai */}
+      {/* Konten utama */}
       <AnimatePresence>
         {introDone && (
           <motion.main
@@ -44,7 +44,11 @@ export default function Home() {
             transition={{ duration: 0.7, ease: "easeOut" }}
           >
             <Particles />
-            <FadeInSection><HeroSection /></FadeInSection>
+
+            {/* startTyping=true langsung saat hero muncul */}
+            <FadeInSection>
+              <HeroSection startTyping={introDone} />
+            </FadeInSection>
 
             <QuoteTransisi quote="Kamu bukan cuma ulang tahun. Kamu tumbuh, dan aku beruntung bisa nonton prosesnya dari dekat." />
             <FadeInSection><SectionKedua /></FadeInSection>
