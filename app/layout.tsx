@@ -15,8 +15,16 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Untuk Ameisha 💕",
   description: "Sesuatu yang spesial untukmu",
-  icons: {
-    icon: "/favicon.ico",
+  openGraph: {
+    title: "Untuk Ameisha 💕",
+    description: "Sesuatu yang spesial untukmu",
+    images: [
+      {
+        url: "https://harispesialkamu.vercel.app/og-image.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
   },
 };
 
