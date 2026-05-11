@@ -332,7 +332,7 @@ export default function IntroScreen({ onDone }: { onDone: () => void }): JSX.Ele
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
-              className="text-[10px] sm:text-xs tracking-[0.45em] uppercase"
+              className="text-[10px] sm:text-xs tracking-[0.45em] uppercase text-left w-full px-6"
               style={{ color: "rgba(255,180,200,0.5)", fontFamily: "'Georgia', serif" }}
             >
               untuk Ameisha Pacarku yang istimewa
