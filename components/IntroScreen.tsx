@@ -296,7 +296,7 @@ export default function IntroScreen({ onDone }: { onDone: () => void }): JSX.Ele
               className="text-[10px] sm:text-xs tracking-[0.45em] uppercase"
               style={{ color: "rgba(255,180,200,0.5)", fontFamily: "'Georgia', serif" }}
             >
-              untuk kamu yang istimewa
+              untuk Ameisha Pacarku Yang Istimewa
             </motion.p>
 
             {/* Gift box */}
