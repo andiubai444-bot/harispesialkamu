@@ -12,9 +12,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Untuk Ameisha 💕",
   description: "Sesuatu yang spesial untukmu",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
